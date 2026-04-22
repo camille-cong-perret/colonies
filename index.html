@@ -110,21 +110,21 @@
     /* HELP MODAL */
     .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);
       z-index:2000;display:flex;align-items:center;justify-content:center;
+      padding:24px;
       opacity:0;pointer-events:none;transition:opacity .2s}
     .modal-overlay.open{opacity:1;pointer-events:auto}
     .modal-box{background:var(--white);border-radius:14px;
-      width:min(920px,92vw);max-height:90vh;
-      overflow-y:auto;position:relative;
+      max-width:min(920px,92vw);max-height:calc(100vh - 48px);
+      overflow:hidden;position:relative;
       box-shadow:0 20px 60px rgba(0,0,0,.25);
+      display:flex;flex-direction:column;
       transform:translateY(12px);transition:transform .2s}
     .modal-overlay.open .modal-box{transform:translateY(0)}
     .modal-close{position:absolute;top:14px;right:16px;
       background:none;border:none;cursor:pointer;
       font-size:22px;line-height:1;color:#111;font-weight:300;
-      z-index:10;padding:4px 8px;border-radius:50%;
-      transition:background .15s}
-    .modal-close:hover{background:#f0ece4}
-    .modal-box img{width:100%;height:auto;display:block;border-radius:14px}
+      z-index:10;padding:4px 8px;border-radius:50%}
+    .modal-box img{width:100%;height:100%;object-fit:contain;display:block;border-radius:14px}
     .card-title{font-size:18px;font-weight:700;margin-bottom:5px;line-height:1.2}
     .card-title span{font-weight:400}
     .card-meta{font-size:12.5px;color:var(--muted);line-height:1.55}
