@@ -37,7 +37,7 @@
     .filters{background:var(--filter-bar);border-bottom:1px solid #d6c9a8;
       padding:11px 28px;display:flex;align-items:center;gap:8px;flex-shrink:0}
     .filter-btn,.toggle-pill,.filter-date{
-      background:var(--white);border:1.5px solid #c8bfb0;border-radius:8px;
+      background:var(--white);border:1.5px solid #c8bfb0;border-radius:5px;
       height:42px;padding:0 18px;font-size:14px;font-family:inherit;font-weight:500;
       color:var(--text);display:inline-flex;align-items:center;gap:8px;
       white-space:nowrap;cursor:pointer;transition:border-color .12s;line-height:1}
@@ -53,8 +53,9 @@
     .toggle-track.on::after{left:20.5px}
     .filter-spacer{flex:1}
     .reset-btn{background:none;border:none;font-size:13.5px;cursor:pointer;
-      text-decoration:underline;font-family:inherit;color:var(--text);white-space:nowrap}
-    .ask-btn{background:var(--teal);color:white;border:none;border-radius:8px;
+      text-decoration:underline;font-family:inherit;color:var(--text);white-space:nowrap;
+      font-weight:700;margin-right:12px}
+    .ask-btn{background:var(--teal);color:white;border:none;border-radius:5px;
       height:42px;padding:0 22px;font-size:14px;font-weight:700;font-family:inherit;
       cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
       transition:background .15s}
@@ -73,8 +74,8 @@
     .list-header h1 strong{font-weight:800}
     #resultCount{font-size:13.5px;color:var(--muted)}
     .badges{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
-    .feat-badge{display:flex;align-items:center;gap:6px;border:1px solid var(--border);
-      border-radius:24px;padding:5px 13px;font-size:12px;color:var(--muted)}
+    .feat-badge{display:flex;align-items:center;gap:6px;background:var(--white);
+      border-radius:5px;padding:6px 13px;font-size:12px;color:var(--text);font-weight:500}
     .feat-badge svg{width:13px;height:13px}
 
     /* CARD */
@@ -94,15 +95,36 @@
       border-radius:5px;text-transform:uppercase}
     .card-body{padding:18px 22px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
     .card-tags{display:flex;gap:6px;margin-bottom:9px;flex-wrap:wrap;align-items:center}
-    .tag{font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:6px;
+    .tag{font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:4px;
       display:inline-flex;align-items:center;gap:4px;line-height:1}
     .tag.co{background:var(--co-bg);color:var(--co-fg)}
     .tag.flat{background:var(--flat-bg);color:var(--flat-fg)}
     .tag.priv{background:var(--priv-bg);color:var(--priv-fg)}
     .tag.xxl{background:var(--xxl-bg);color:var(--xxl-fg);font-size:11px}
-    .tag-help{width:18px;height:18px;border:1.5px solid #ccc;border-radius:50%;
+    .tag-help{width:18px;height:18px;border:1.5px solid #111;border-radius:50%;
       display:inline-flex;align-items:center;justify-content:center;
-      font-size:11px;color:#888;cursor:default}
+      font-size:11px;font-weight:700;color:#111;cursor:pointer;
+      transition:background .15s,color .15s;flex-shrink:0}
+    .tag-help:hover{background:#111;color:#fff}
+
+    /* HELP MODAL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);
+      z-index:2000;display:flex;align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;transition:opacity .2s}
+    .modal-overlay.open{opacity:1;pointer-events:auto}
+    .modal-box{background:var(--white);border-radius:14px;
+      width:min(920px,92vw);max-height:90vh;
+      overflow-y:auto;position:relative;
+      box-shadow:0 20px 60px rgba(0,0,0,.25);
+      transform:translateY(12px);transition:transform .2s}
+    .modal-overlay.open .modal-box{transform:translateY(0)}
+    .modal-close{position:absolute;top:14px;right:16px;
+      background:none;border:none;cursor:pointer;
+      font-size:22px;line-height:1;color:#111;font-weight:300;
+      z-index:10;padding:4px 8px;border-radius:50%;
+      transition:background .15s}
+    .modal-close:hover{background:#f0ece4}
+    .modal-box img{width:100%;height:auto;display:block;border-radius:14px}
     .card-title{font-size:18px;font-weight:700;margin-bottom:5px;line-height:1.2}
     .card-title span{font-weight:400}
     .card-meta{font-size:12.5px;color:var(--muted);line-height:1.55}
@@ -158,14 +180,20 @@
     /* MARKERS */
     .marker-wrap{position:relative;display:flex;align-items:center;justify-content:center;overflow:visible}
     .map-dot{width:16px;height:16px;background:var(--teal);border:1.5px solid white;
-      border-radius:50%;box-shadow:0 1px 5px rgba(0,0,0,.25);cursor:pointer;
-      transition:transform .15s,background .15s}
-    .map-dot.hov{transform:scale(1.55);background:#111}
-    .map-cluster{background:var(--teal);border:2px solid white;border-radius:50%;
+      border-radius:50%!important;box-shadow:0 1px 5px rgba(0,0,0,.25);cursor:pointer;
+      transition:transform .15s,background .15s;
+      will-change:transform;transform:translateZ(0);backface-visibility:hidden;
+      flex-shrink:0;}
+    .map-dot.hov{transform:translateZ(0) scale(1.55);background:#111}
+    .map-cluster{background:var(--teal);border:2px solid white;border-radius:50%!important;
       display:flex;align-items:center;justify-content:center;font-weight:700;color:white;
       box-shadow:0 2px 8px rgba(0,0,0,.22);cursor:pointer;
-      transition:transform .15s,background .15s}
-    .map-cluster.hov{transform:scale(1.15);background:#111}
+      transition:transform .15s,background .15s;
+      will-change:transform;transform:translateZ(0);backface-visibility:hidden;
+      flex-shrink:0;}
+    .map-cluster.hov{transform:translateZ(0) scale(1.15);background:#111}
+    /* Force Leaflet marker wrapper to not clip or distort */
+    .leaflet-marker-icon{overflow:visible!important;background:none!important;border:none!important;}
     .price-tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
       background:#111;color:white;font-size:13px;font-weight:700;
       padding:6px 12px;border-radius:8px;white-space:nowrap;pointer-events:none;
@@ -257,6 +285,14 @@
   </div>
 </div>
 
+<!-- HELP MODAL -->
+<div class="modal-overlay" id="helpModal" onclick="closeHelpModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeHelpModal(null)">&#x2715;</button>
+    <img src="https://raw.githubusercontent.com/camille-cong-perret/colonies/main/help.png" alt="Help – home types comparison"/>
+  </div>
+</div>
+
 <script>
 /* ═══════════════════════════════════════════════════════
    GITHUB CONFIG — replace with your actual repo details
@@ -287,7 +323,7 @@ const ALL_PROPERTIES = [
   { id:4,  page:1, name:"Liège",             city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",          opening:null,
     meta:"Shared home | 10 units | 240 m²",  perks:[],
     price:"from €1,350", priceShort:"€1,350", priceNum:1350, oldPrice:null, discount:null,
-    img:"li%C3%A8ge.jpeg",       lat:48.877, lng:2.358, lines:["RER_A","M13"] },
+    img:"liège.jpeg",       lat:48.877, lng:2.358, lines:["RER_A","M13"] },
 
   { id:5,  page:1, name:"Paris Garibaldi",   city:"Paris", type:"Flatshare",   xxl:false, avail:"1 UNIT AVAILABLE",           opening:null,
     meta:"Shared home | 5 units | 105 m²",   perks:[],
@@ -534,7 +570,7 @@ function renderCards(){
         <div>
           <div class="card-tags">
             <span class="tag ${typeClass(p.type)}">${p.type}</span>
-            ${xxlTag}<span class="tag-help">?</span>
+            ${xxlTag}<span class="tag-help" onclick="event.stopPropagation();openHelpModal()">?</span>
           </div>
           <div class="card-title">${p.name} <span>in ${p.city}</span></div>
           <div class="card-meta">${p.meta}${perks}</div>
@@ -602,10 +638,11 @@ function buildMapMarkers(){
     const dot=document.createElement('div');
     if(cl.count>1){
       dot.className='map-cluster';
-      dot.style.cssText=`width:${sz}px;height:${sz}px;font-size:${sz>35?15:13}px`;
+      dot.style.cssText=`width:${sz}px;height:${sz}px;min-width:${sz}px;min-height:${sz}px;font-size:${sz>35?15:13}px;border-radius:50%;`;
       dot.textContent=cl.count;
     } else {
       dot.className='map-dot';
+      dot.style.borderRadius='50%';
     }
     wrap.appendChild(dot);
 
@@ -697,7 +734,13 @@ function updateMarkerVisibility(ids){
 /* ═══════════════════════════════════════════════════════
    MISC
 ═══════════════════════════════════════════════════════ */
+function openHelpModal(){document.getElementById('helpModal').classList.add('open');}
+function closeHelpModal(e){
+  if(e===null||e.target===document.getElementById('helpModal'))
+    document.getElementById('helpModal').classList.remove('open');
+}
 document.getElementById('bathToggle').addEventListener('click',function(){this.classList.toggle('on');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeHelpModal(null);});
 document.getElementById('resetBtn').addEventListener('click',clearMapFilter);
 
 renderCards();
