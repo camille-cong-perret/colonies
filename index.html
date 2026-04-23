@@ -153,7 +153,7 @@
 
     /* PAGINATION */
     .pagination{display:flex;align-items:center;justify-content:center;gap:10px;padding:28px 0 12px;flex-shrink:0}
-    .page-arrow{background:none;border:none;font-size:28px;cursor:pointer;color:#111;
+    .page-arrow{background:none;border:none;font-size:0;cursor:pointer;color:#111;
       padding:0 6px;line-height:1;font-family:serif;opacity:1;transition:opacity .15s}
     .page-arrow:hover{opacity:.6}
     .page-arrow.hidden{visibility:hidden;pointer-events:none}
@@ -742,9 +742,9 @@ function renderCards(){
 function renderPagination(){
   const pg=document.getElementById('pagination');
   pg.innerHTML=`
-    <button class="page-arrow${currentPage===1?' hidden':''}" id="prevBtn">‹</button>
+    <button class="page-arrow${currentPage===1?' hidden':''}" id="prevBtn"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
     ${[1,2,3].map(n=>`<button class="page-num${n===currentPage?' active':''}" onclick="goToPage(${n})">${n}</button>`).join('')}
-    <button class="page-arrow${currentPage===3?' hidden':''}" id="nextBtn">›</button>`;
+    <button class="page-arrow${currentPage===3?' hidden':''}" id="nextBtn"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>`;
   document.getElementById('prevBtn').onclick=()=>goToPage(currentPage-1);
   document.getElementById('nextBtn').onclick=()=>goToPage(currentPage+1);
 }
