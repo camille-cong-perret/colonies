@@ -47,7 +47,7 @@
       white-space:nowrap;cursor:pointer;line-height:1}
     /* only active (City) keeps its border */
     .filter-btn.active{border-color:var(--text);border-width:2.5px}
-    .filter-btn svg{width:12px;height:12px;flex-shrink:0}
+    .filter-btn svg{width:15px;height:15px;flex-shrink:0}
     .filter-date svg{width:15px;height:15px;flex-shrink:0}
     .toggle-track{width:40px;height:22px;background:#ccc;border-radius:11px;
       position:relative;transition:background .2s;flex-shrink:0}
@@ -226,11 +226,13 @@
     }
     .map-overlay.visible{display:flex}
 
-    /* Carousel viewport — clips cards, shows peek on sides */
+    /* Carousel viewport — clips cards horizontally, allows shadow top/bottom */
     .mp-carousel-viewport{
       width:100%;
-      overflow:hidden;
+      overflow-x:hidden;
+      overflow-y:visible;
       position:relative;
+      padding:4px 0;   /* room for box-shadow top + bottom */
     }
     /* Track holds all cards in a row, slides via transform */
     .mp-carousel-track{
@@ -248,13 +250,14 @@
     .map-popup{
       background:var(--white);border-radius:var(--radius);
       box-shadow:0 8px 32px rgba(0,0,0,.3);
-      overflow:hidden;
+      overflow:visible;
       transition:outline .1s;
       cursor:pointer;
     }
-    .map-popup:hover{outline:2.5px solid #111}
+    .map-popup:hover{outline:2.5px solid #111;border-radius:var(--radius)}
 
-    .mp-img{width:100%;height:200px;position:relative;overflow:hidden;background:#e5e9e4}
+    .mp-img{width:100%;height:200px;position:relative;overflow:hidden;background:#e5e9e4;
+      border-radius:var(--radius) var(--radius) 0 0}
     .mp-img img{width:100%;height:100%;object-fit:cover;display:block}
     .mp-body{padding:14px 16px 16px;background:var(--white)}
     .mp-price{font-size:15px;font-weight:700;text-align:right;margin-top:8px}
@@ -325,14 +328,14 @@
   <!-- Set GITHUB constant below, then logo loads automatically -->
   <img id="site-logo" class="site-logo" alt="colonies" src=""/>
   <div class="nav-links">
-    <a href="#">Find my home <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
-    <a href="#">Home types <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+    <a href="#">Find my home <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+    <a href="#">Home types <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
     <a href="#">Corporate offers</a>
-    <a href="#">Invest with us <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
-    <a href="#">About us <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+    <a href="#">Invest with us <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+    <a href="#">About us <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
   </div>
   <div class="nav-right">
-    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> EN <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> EN <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
     <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Login</a>
   </div>
 </nav>
