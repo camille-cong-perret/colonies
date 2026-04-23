@@ -213,43 +213,59 @@
     #map-filter-badge button{background:rgba(255,255,255,.22);border:none;border-radius:3px;
       color:white;font-size:11px;padding:2px 9px;cursor:pointer;font-family:inherit;font-weight:600}
     #map-filter-badge button:hover{background:rgba(255,255,255,.38)}
-    /* MAP OVERLAY + POPUP */
-    /* The overlay covers the entire map-panel, dims it, and centers the card */
+    /* MAP OVERLAY + CAROUSEL */
     .map-overlay{
       position:absolute;inset:0;
       background:rgba(0,0,0,.5);
       z-index:800;
       display:none;
+      flex-direction:column;
       align-items:center;
       justify-content:center;
+      gap:20px;
     }
     .map-overlay.visible{display:flex}
+
+    /* Carousel viewport — clips cards, shows peek on sides */
+    .mp-carousel-viewport{
+      width:100%;
+      overflow:hidden;
+      position:relative;
+    }
+    /* Track holds all cards in a row, slides via transform */
+    .mp-carousel-track{
+      display:flex;
+      transition:transform .35s cubic-bezier(.4,0,.2,1);
+      will-change:transform;
+    }
+    /* Each card slot */
+    .mp-card-slot{
+      flex:0 0 100%;
+      padding:0 60px; /* peek space */
+      box-sizing:border-box;
+    }
+    /* The actual card */
     .map-popup{
-      width:min(440px,calc(100% - 40px));
       background:var(--white);border-radius:var(--radius);
       box-shadow:0 8px 32px rgba(0,0,0,.3);
-      overflow:hidden;position:relative;
+      overflow:hidden;
       transition:outline .1s;
+      cursor:pointer;
     }
     .map-popup:hover{outline:2.5px solid #111}
-    .mp-card-wrap{
-      display:flex;flex-direction:column;align-items:center;gap:20px;
-      width:min(440px,calc(100% - 40px));
-    }
-    @keyframes slideFromRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
-    @keyframes slideFromLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
-    .mp-slide-right{animation:slideFromRight .22s ease}
-    .mp-slide-left{animation:slideFromLeft .22s ease}
-    .mp-img{width:100%;height:220px;position:relative;overflow:hidden;background:#e5e9e4}
+
+    .mp-img{width:100%;height:200px;position:relative;overflow:hidden;background:#e5e9e4}
     .mp-img img{width:100%;height:100%;object-fit:cover;display:block}
-    .mp-body{padding:16px 18px 18px;background:var(--white)}
+    .mp-body{padding:14px 16px 16px;background:var(--white)}
     .mp-price{font-size:15px;font-weight:700;text-align:right;margin-top:8px}
     .mp-price .from{font-weight:400}
     .mp-price .old{text-decoration:line-through;color:var(--muted);font-weight:400;margin-right:3px}
     .mp-price .disc{display:block;font-size:11px;font-weight:400;color:var(--muted)}
-    /* Nav arrows — below card, floating on dark overlay, no bg, no circle */
+
+    /* Nav arrows — below carousel, floating on overlay */
     .mp-nav{
       display:flex;align-items:center;justify-content:center;gap:24px;
+      flex-shrink:0;
     }
     .mp-nav button{
       background:none;border:none;padding:0;
@@ -342,26 +358,17 @@
   <div class="map-panel">
     <div id="map"></div>
 
-    <!-- MAP OVERLAY + LISTING POPUP (overlay covers full map, centers card) -->
+    <!-- MAP OVERLAY + CAROUSEL -->
     <div class="map-overlay" id="mapOverlay" onclick="handleOverlayClick(event)">
-      <div class="mp-card-wrap">
-        <div class="map-popup" id="mapPopup">
-          <div class="mp-img">
-            <img id="mpImg" src="" alt=""/>
-            <span id="mpAvail" class="avail-badge"></span>
-          </div>
-          <div class="mp-body">
-            <div class="card-tags" id="mpTags"></div>
-            <div class="card-title" id="mpTitle"></div>
-            <div class="card-meta" id="mpMeta"></div>
-            <div class="mp-price" id="mpPrice"></div>
-          </div>
+      <div class="mp-carousel-viewport" id="mpViewport">
+        <div class="mp-carousel-track" id="mpTrack">
+          <!-- cards injected by JS -->
         </div>
-        <div class="mp-nav" id="mpNav" style="display:none">
-          <button id="mpPrev" onclick="event.stopPropagation();mpNavigate(-1)">&#8592;</button>
-          <span class="mp-counter" id="mpCounter"></span>
-          <button id="mpNext" onclick="event.stopPropagation();mpNavigate(1)">&#8594;</button>
-        </div>
+      </div>
+      <div class="mp-nav" id="mpNav" style="display:none">
+        <button id="mpPrev" onclick="event.stopPropagation();mpNavigate(-1)">&#8592;</button>
+        <span class="mp-counter" id="mpCounter"></span>
+        <button id="mpNext" onclick="event.stopPropagation();mpNavigate(1)">&#8594;</button>
       </div>
     </div>
 
@@ -847,9 +854,48 @@ function updateMarkerVisibility(ids){
 ═══════════════════════════════════════════════════════ */
 let mpIds=[], mpIdx=0;
 
+function cardHTML(p){
+  const xxlTag = p.xxl
+    ? `<span class="tag xxl"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg> XXL building</span>` : '';
+  const typeClass = t => t==='Coliving'?'co':t==='Flatshare'?'flat':'priv';
+  const perks = p.perks.length ? `<br>${p.perks.join(' | ')}` : '';
+  const priceHtml = p.oldPrice
+    ? `<span class="old">${p.oldPrice}</span> ${p.price.replace('from ','')} <span class="from">/ month</span><span class="disc">${p.discount}</span>`
+    : `${p.price} <span class="from">/ month</span>`;
+  return `
+    <div class="mp-card-slot">
+      <div class="map-popup">
+        <div class="mp-img">
+          <img src="${GITHUB}${p.img}" alt="${p.name}"/>
+          <span class="avail-badge">${p.avail}</span>
+        </div>
+        <div class="mp-body">
+          <div class="card-tags">
+            <span class="tag ${typeClass(p.type)}">${p.type}</span>${xxlTag}
+            <span class="tag-help" onclick="event.stopPropagation();openHelpModal()">?</span>
+          </div>
+          <div class="card-title">${p.name} <span>in ${p.city}</span></div>
+          <div class="card-meta">${p.meta}${perks}</div>
+          <div class="mp-price">${priceHtml}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
 function showMapPopup(ids, idx){
   mpIds=ids; mpIdx=idx;
-  renderMapPopup();
+  // Build all cards in the track
+  const track = document.getElementById('mpTrack');
+  track.innerHTML = ids.map(id => {
+    const p = ALL_PROPERTIES.find(x=>x.id===id);
+    return p ? cardHTML(p) : '';
+  }).join('');
+  // Snap to starting card instantly (no transition)
+  track.style.transition = 'none';
+  track.style.transform = `translateX(-${mpIdx * 100}%)`;
+  // Re-enable transition after paint
+  requestAnimationFrame(()=>{ track.style.transition = ''; });
+  updateNavState();
   document.getElementById('mapOverlay').classList.add('visible');
 }
 
@@ -858,63 +904,34 @@ function hideMapPopup(){
 }
 
 function handleOverlayClick(e){
-  if(e.target.closest('#mapPopup') || e.target.closest('#mpNav')) return;
+  if(e.target.closest('.map-popup') || e.target.closest('.mp-nav')) return;
   hideMapPopup();
 }
 
 function mpNavigate(dir){
-  const popup = document.getElementById('mapPopup');
-  // Trigger slide animation
-  popup.classList.remove('mp-slide-right','mp-slide-left');
-  void popup.offsetWidth; // reflow
-  popup.classList.add(dir > 0 ? 'mp-slide-right' : 'mp-slide-left');
-  mpIdx = (mpIdx + dir + mpIds.length) % mpIds.length;
-  renderMapPopup();
+  const newIdx = mpIdx + dir;
+  if(newIdx < 0 || newIdx >= mpIds.length) return;
+  mpIdx = newIdx;
+  const track = document.getElementById('mpTrack');
+  track.style.transform = `translateX(-${mpIdx * 100}%)`;
+  updateNavState();
 }
 
-function renderMapPopup(){
-  const p = ALL_PROPERTIES.find(x=>x.id===mpIds[mpIdx]);
-  if(!p) return;
-
-  // Image
-  document.getElementById('mpImg').src = GITHUB + p.img;
-  document.getElementById('mpImg').alt = p.name;
-  document.getElementById('mpAvail').textContent = p.avail;
-
-  // Tags
-  const xxlTag = p.xxl
-    ? `<span class="tag xxl"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg> XXL building</span>` : '';
-  const typeClass = t => t==='Coliving'?'co':t==='Flatshare'?'flat':'priv';
-  document.getElementById('mpTags').innerHTML =
-    `<span class="tag ${typeClass(p.type)}">${p.type}</span>${xxlTag}<span class="tag-help" onclick="event.stopPropagation();openHelpModal()">?</span>`;
-
-  // Title
-  document.getElementById('mpTitle').innerHTML = `${p.name} <span>in ${p.city}</span>`;
-
-  // Meta
-  const perks = p.perks.length ? `<br>${p.perks.join(' | ')}` : '';
-  document.getElementById('mpMeta').innerHTML = `${p.meta}${perks}`;
-
-  // Price
-  const priceHtml = p.oldPrice
-    ? `<span class="old">${p.oldPrice}</span> ${p.price.replace('from ','')} <span class="from">/ month</span><span class="disc">${p.discount}</span>`
-    : `${p.price} <span class="from">/ month</span>`;
-  document.getElementById('mpPrice').innerHTML = priceHtml;
-
-  // Nav arrows (only for clusters)
+function updateNavState(){
   const nav = document.getElementById('mpNav');
   const prevBtn = document.getElementById('mpPrev');
   const nextBtn = document.getElementById('mpNext');
   if(mpIds.length > 1){
     nav.style.display = 'flex';
     document.getElementById('mpCounter').textContent = `${mpIdx+1} / ${mpIds.length}`;
-    // First card: left arrow grey; Last card: right arrow grey
     prevBtn.classList.toggle('mp-disabled', mpIdx === 0);
     nextBtn.classList.toggle('mp-disabled', mpIdx === mpIds.length - 1);
   } else {
     nav.style.display = 'none';
   }
 }
+
+function renderMapPopup(){ /* legacy stub — no longer used */ }
 
 // Close popup when clicking on map background
 document.addEventListener('DOMContentLoaded', ()=>{
