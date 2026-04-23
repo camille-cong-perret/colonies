@@ -26,11 +26,11 @@
     /* NAV */
     nav{height:65px;background:var(--bg);border-bottom:1px solid var(--border);
       display:flex;align-items:center;padding:0 28px;gap:28px;flex-shrink:0;z-index:200}
-    .site-logo{height:32px;width:auto;display:block}
+    .site-logo{height:64px;width:auto;display:block}
     .nav-links{display:flex;gap:36px;margin-left:8px}
-    .nav-links a{font-size:14px;color:var(--text);text-decoration:none;font-weight:700}
+    .nav-links a{font-size:16px;color:var(--text);text-decoration:none;font-weight:400}
     .nav-links a:hover{opacity:.7}
-    .nav-right{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:15px;font-weight:700}
+    .nav-right{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:16px;font-weight:400}
     .nav-right a{color:var(--text);text-decoration:none;display:flex;align-items:center;gap:6px}
     .nav-right svg{width:17px;height:17px}
 
@@ -72,12 +72,12 @@
     .list-panel::-webkit-scrollbar{width:4px}
     .list-panel::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px}
     .list-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
-    .list-header h1{font-size:38px;font-weight:400;letter-spacing:-.3px}
+    .list-header h1{font-size:46px;font-weight:400;letter-spacing:-.3px}
     .list-header h1 strong{font-weight:800}
     #resultCount{font-size:13.5px;color:var(--text)}
     .badges{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
     .feat-badge{display:flex;align-items:center;gap:6px;background:var(--white);
-      border-radius:5px;padding:6px 13px;font-size:12px;color:var(--text);font-weight:500}
+      border-radius:5px;padding:6px 13px;font-size:12px;color:var(--text);font-weight:700}
     .feat-badge svg{width:13px;height:13px}
 
     /* CARD */
@@ -124,7 +124,7 @@
 
     .card-title{font-size:18px;font-weight:700;margin-bottom:5px;line-height:1.2}
     .card-title span{font-weight:400}
-    .card-meta{font-size:12.5px;color:var(--muted);line-height:1.55}
+    .card-meta{font-size:12.5px;color:var(--text);line-height:1.55}
     .card-price{font-size:15.5px;font-weight:700;text-align:right}
     .card-price .from{font-weight:400}
     .card-price .old{text-decoration:line-through;color:var(--muted);font-weight:400;margin-right:3px}
@@ -293,127 +293,103 @@ document.getElementById('site-logo').src = GITHUB + 'logo.png';
    ALL 23 LISTINGS  (page = 1 | 2 | 3)
 ═══════════════════════════════════════════════════════ */
 const ALL_PROPERTIES = [
-  // ── PAGE 1 ──────────────────────────────────────────
-  { id:1,  page:1, name:"Helios 1",          city:"Paris", type:"Coliving",    xxl:true,  avail:"8 UNITS AVAILABLE",          opening:null,
+  // PAGE 1
+  { id:1,  page:1, name:"Helios 1",          city:"Paris", type:"Coliving",    xxl:true,  avail:"8 UNITS AVAILABLE",
     meta:"Shared home | 17 units | 515 m²",  perks:[],
-    price:"from €1,420", priceShort:"€1,420", priceNum:1420, oldPrice:null, discount:null,
-    img:"helios-1.jpeg",         lat:48.880, lng:2.297, lines:["RER_C","T3b"] },
-
-  { id:2,  page:1, name:"Paris Bobillot",    city:"Paris", type:"Flatshare",   xxl:false, avail:"5 UNITS AVAILABLE",          opening:null,
+    price:"from €1,420", priceShort:"€1,420", oldPrice:null, discount:null, opening:null,
+    img:"helios-1.jpeg",         lat:48.882, lng:2.294, lines:["RER_C","T3b"] },
+  { id:2,  page:1, name:"Paris Bobillot",    city:"Paris", type:"Flatshare",   xxl:false, avail:"5 UNITS AVAILABLE",
     meta:"Shared home | 7 units | 122 m²",   perks:[],
-    price:"from €1,050", priceShort:"€1,050", priceNum:1050, oldPrice:null, discount:null,
-    img:"paris-bobillot.jpeg",   lat:48.831, lng:2.313, lines:["M6","T3a"] },
-
-  { id:3,  page:1, name:"Paris Ivry",        city:"Paris", type:"Flatshare",   xxl:false, avail:"3 UNITS AVAILABLE",          opening:null,
+    price:"from €1,050", priceShort:"€1,050", oldPrice:null, discount:null, opening:null,
+    img:"paris-bobillot.jpeg",   lat:48.830, lng:2.352, lines:["T3b"] },
+  { id:3,  page:1, name:"Paris Ivry",        city:"Paris", type:"Flatshare",   xxl:false, avail:"3 UNITS AVAILABLE",
     meta:"Shared home | 7 units | 144 m²",   perks:[],
-    price:"from €1,058", priceShort:"€1,058", priceNum:1058, oldPrice:null, discount:null,
-    img:"paris-ivry.jpeg",       lat:48.830, lng:2.354, lines:["M7","RER_C"] },
-
-  { id:4,  page:1, name:"Liège",             city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",          opening:null,
+    price:"from €1,058", priceShort:"€1,058", oldPrice:null, discount:null, opening:null,
+    img:"paris-ivry.jpeg",       lat:48.823, lng:2.366, lines:["M7"] },
+  { id:4,  page:1, name:"Liège",             city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 10 units | 240 m²",  perks:[],
-    price:"from €1,350", priceShort:"€1,350", priceNum:1350, oldPrice:null, discount:null,
-    img:"liege.jpeg",       lat:48.877, lng:2.358, lines:["RER_A","M13"] },
-
-  { id:5,  page:1, name:"Paris Garibaldi",   city:"Paris", type:"Flatshare",   xxl:false, avail:"1 UNIT AVAILABLE",           opening:null,
+    price:"from €1,350", priceShort:"€1,350", oldPrice:null, discount:null, opening:null,
+    img:"liege.jpeg",            lat:48.878, lng:2.332, lines:["J","L","M13"] },
+  { id:5,  page:1, name:"Paris Garibaldi",   city:"Paris", type:"Flatshare",   xxl:false, avail:"1 UNIT AVAILABLE",
     meta:"Shared home | 5 units | 105 m²",   perks:[],
-    price:"from €1,047", priceShort:"€1,047", priceNum:1047, oldPrice:"€1,237", discount:"Discount on the first 3 rents",
-    img:"paris-garibaldi.jpeg",  lat:48.835, lng:2.334, lines:["T3a","M6"] },
-
-  // ← PROMO BLOCK "features" inserted after id:5 on page 1
-
-  { id:6,  page:1, name:"Paris Borrégo",     city:"Paris", type:"Flatshare",   xxl:false, avail:"2 UNITS AVAILABLE",          opening:null,
+    price:"from €1,047", priceShort:"€1,047", oldPrice:"€1,237", discount:"Discount on the first 3 rents", opening:null,
+    img:"paris-garibaldi.jpeg",  lat:48.833, lng:2.309, lines:["M12"] },
+  // PROMO after id:5
+  { id:6,  page:1, name:"Paris Borrégo",     city:"Paris", type:"Flatshare",   xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 5 units | 92 m²",    perks:["Balcony"],
-    price:"from €999",   priceShort:"€999",   priceNum:999,  oldPrice:null, discount:null,
-    img:"paris-borrego.jpeg",    lat:48.867, lng:2.396, lines:["T3b","RER_B"] },
-
-  { id:7,  page:1, name:"Hermel",            city:"Paris", type:"Coliving",    xxl:false, avail:"4 UNITS AVAILABLE",          opening:null,
+    price:"from €999",   priceShort:"€999",   oldPrice:null, discount:null, opening:null,
+    img:"paris-borrego.jpeg",    lat:48.864, lng:2.397, lines:["T3b"] },
+  { id:7,  page:1, name:"Hermel",            city:"Paris", type:"Coliving",    xxl:false, avail:"4 UNITS AVAILABLE",
     meta:"Shared home | 15 units | 308 m²",  perks:["Terrace","Veranda","Garden"],
-    price:"from €1,265", priceShort:"€1,265", priceNum:1265, oldPrice:null, discount:null,
-    img:"hermel.jpeg",           lat:48.862, lng:2.350, lines:["RER_B","T3b"] },
-
-  { id:8,  page:1, name:"Bovary House",      city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",          opening:null,
+    price:"from €1,265", priceShort:"€1,265", oldPrice:null, discount:null, opening:null,
+    img:"hermel.jpeg",           lat:48.892, lng:2.348, lines:["M4"] },
+  { id:8,  page:1, name:"Bovary House",      city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 15 units | 359 m²",  perks:[],
-    price:"from €1,380", priceShort:"€1,380", priceNum:1380, oldPrice:null, discount:null,
-    img:"bovary-house.jpeg",     lat:48.855, lng:2.365, lines:["T3b","RER_B"] },
-
-  { id:9,  page:1, name:"Jumo Home 5.01",    city:"Paris", type:"Coliving",    xxl:true,  avail:"2 UNITS AVAILABLE",          opening:null,
+    price:"from €1,380", priceShort:"€1,380", oldPrice:null, discount:null, opening:null,
+    img:"bovary-house.jpeg",     lat:48.856, lng:2.360, lines:["J","L","M13"] },
+  { id:9,  page:1, name:"Jumo Home 5.01",    city:"Paris", type:"Coliving",    xxl:true,  avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 12 units | 410 m²",  perks:[],
-    price:"from €1,138", priceShort:"€1,138", priceNum:1138, oldPrice:null, discount:null,
-    img:"jumo-home-5.01.png",    lat:48.857, lng:2.294, lines:["T2","M7"] },
-
-  { id:10, page:1, name:"Garnier",           city:"Paris", type:"Coliving",    xxl:false, avail:"3 UNITS AVAILABLE",          opening:null,
+    price:"from €1,138", priceShort:"€1,138", oldPrice:null, discount:null, opening:null,
+    img:"jumo-home-5.01.png",    lat:48.849, lng:2.298, lines:["M12","T3b"] },
+  { id:10, page:1, name:"Garnier",           city:"Paris", type:"Coliving",    xxl:false, avail:"3 UNITS AVAILABLE",
     meta:"Shared home | 10 units | 200 m²",  perks:["Living room","Balcony"],
-    price:"from €1,383", priceShort:"€1,383", priceNum:1383, oldPrice:null, discount:null,
-    img:"garnier.jpeg",          lat:48.872, lng:2.332, lines:["M7","RER_A"] },
-
-  // ── PAGE 2 ──────────────────────────────────────────
-  { id:11, page:2, name:"Helios 505",        city:"Paris", type:"Private Flat", xxl:true, avail:"AVAILABLE ON 24 APRIL 2026",  opening:null,
+    price:"from €1,383", priceShort:"€1,383", oldPrice:null, discount:null, opening:null,
+    img:"garnier.jpeg",          lat:48.872, lng:2.333, lines:["RER_A","J"] },
+  // PAGE 2
+  { id:11, page:2, name:"Helios 505",        city:"Paris", type:"Private Flat", xxl:true,  avail:"AVAILABLE ON 24 APRIL 2026",
     meta:"Private flat | Studio | 15 m²",    perks:[],
-    price:"€1,690",      priceShort:"€1,690", priceNum:1690, oldPrice:null, discount:null,
-    img:"helios-505.jpeg",       lat:48.881, lng:2.296, lines:["RER_C","T3b"] },
-
-  { id:12, page:2, name:"Helios 4",          city:"Paris", type:"Coliving",    xxl:true,  avail:"4 UNITS AVAILABLE",          opening:null,
+    price:"€1,690",      priceShort:"€1,690", oldPrice:null, discount:null, opening:null,
+    img:"helios-505.jpeg",       lat:48.880, lng:2.296, lines:["RER_C","T3b"] },
+  { id:12, page:2, name:"Helios 4",          city:"Paris", type:"Coliving",    xxl:true,  avail:"4 UNITS AVAILABLE",
     meta:"Shared home | 5 units | 108 m²",   perks:[],
-    price:"from €1,550", priceShort:"€1,550", priceNum:1550, oldPrice:null, discount:null,
+    price:"from €1,550", priceShort:"€1,550", oldPrice:null, discount:null, opening:null,
     img:"helios-4.png",          lat:48.879, lng:2.299, lines:["RER_C","T3b"] },
-
-  { id:13, page:2, name:"Jumo Home 7.02",    city:"Paris", type:"Coliving",    xxl:true,  avail:"6 UNITS AVAILABLE",          opening:null,
+  { id:13, page:2, name:"Jumo Home 7.02",    city:"Paris", type:"Coliving",    xxl:true,  avail:"6 UNITS AVAILABLE",
     meta:"Shared home | 12 units | 380 m²",  perks:[],
-    price:"from €1,490", priceShort:"€1,490", priceNum:1490, oldPrice:null, discount:null,
-    img:"jumo-home-7.02.png",    lat:48.858, lng:2.295, lines:["T2","M7"] },
-
-  { id:14, page:2, name:"Helios 310",        city:"Paris", type:"Private Flat", xxl:true, avail:"AVAILABLE ON 02 JUNE 2026",   opening:null,
+    price:"from €1,490", priceShort:"€1,490", oldPrice:null, discount:null, opening:null,
+    img:"jumo-home-7.02.png",    lat:48.851, lng:2.296, lines:["M12","T3b"] },
+  { id:14, page:2, name:"Helios 310",        city:"Paris", type:"Private Flat", xxl:true,  avail:"AVAILABLE ON 02 JUNE 2026",
     meta:"Private flat | Studio | 12 m²",    perks:[],
-    price:"€1,550",      priceShort:"€1,550", priceNum:1550, oldPrice:null, discount:null,
-    img:"helios-310.jpeg",       lat:48.880, lng:2.298, lines:["RER_C","T3b"] },
-
-  { id:15, page:2, name:"Paris Jean Jaurès", city:"Paris", type:"Flatshare",   xxl:false, avail:"2 UNITS AVAILABLE",          opening:null,
+    price:"€1,550",      priceShort:"€1,550", oldPrice:null, discount:null, opening:null,
+    img:"helios-310.jpeg",       lat:48.881, lng:2.298, lines:["RER_C","T3b"] },
+  { id:15, page:2, name:"Paris Jean Jaurès", city:"Paris", type:"Flatshare",   xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 6 units | 125 m²",   perks:[],
-    price:"from €1,092", priceShort:"€1,092", priceNum:1092, oldPrice:null, discount:null,
-    img:"paris-jean-jaures.jpeg",lat:48.882, lng:2.383, lines:["RER_B","T3b"] },
-
-  // ← PROMO BLOCK "howitworks" inserted after id:15 on page 2
-
-  { id:16, page:2, name:"Helios 502",        city:"Paris", type:"Private Flat", xxl:true, avail:"AVAILABLE ON 02 MAY 2026",    opening:null,
+    price:"from €1,092", priceShort:"€1,092", oldPrice:null, discount:null, opening:null,
+    img:"paris-jean-jaures.jpeg",lat:48.883, lng:2.373, lines:["M5"] },
+  // PROMO after id:15
+  { id:16, page:2, name:"Helios 502",        city:"Paris", type:"Private Flat", xxl:true,  avail:"AVAILABLE ON 02 MAY 2026",
     meta:"Private flat | Studio | 16 m²",    perks:[],
-    price:"€1,610",      priceShort:"€1,610", priceNum:1610, oldPrice:null, discount:null,
-    img:"helios-502.jpeg",       lat:48.880, lng:2.300, lines:["RER_C","T3b"] },
-
-  { id:17, page:2, name:"Helios 506",        city:"Paris", type:"Private Flat", xxl:true, avail:"AVAILABLE ON 02 MAY 2026",    opening:null,
+    price:"€1,610",      priceShort:"€1,610", oldPrice:null, discount:null, opening:null,
+    img:"helios-502.jpeg",       lat:48.882, lng:2.300, lines:["RER_C","T3b"] },
+  { id:17, page:2, name:"Helios 506",        city:"Paris", type:"Private Flat", xxl:true,  avail:"AVAILABLE ON 02 MAY 2026",
     meta:"Private flat | Studio | 14 m²",    perks:[],
-    price:"€1,690",      priceShort:"€1,690", priceNum:1690, oldPrice:null, discount:null,
+    price:"€1,690",      priceShort:"€1,690", oldPrice:null, discount:null, opening:null,
     img:"helios-506.jpeg",       lat:48.879, lng:2.297, lines:["RER_C","T3b"] },
-
-  { id:18, page:2, name:"Paris Oradour",     city:"Paris", type:"Flatshare",   xxl:false, avail:"3 UNITS AVAILABLE",          opening:null,
+  { id:18, page:2, name:"Paris Oradour",     city:"Paris", type:"Flatshare",   xxl:false, avail:"3 UNITS AVAILABLE",
     meta:"Shared home | 6 units | 129 m²",   perks:[],
-    price:"from €1,030", priceShort:"€1,030", priceNum:1030, oldPrice:null, discount:null,
-    img:"paris-oradour.jpeg",    lat:48.866, lng:2.272, lines:["T2","M6"] },
-
-  { id:19, page:2, name:"Brabo",             city:"Paris", type:"Coliving",    xxl:false, avail:"1 UNIT AVAILABLE",           opening:null,
+    price:"from €1,030", priceShort:"€1,030", oldPrice:null, discount:null, opening:null,
+    img:"paris-oradour.jpeg",    lat:48.846, lng:2.273, lines:["M4","T3b"] },
+  { id:19, page:2, name:"Brabo",             city:"Paris", type:"Coliving",    xxl:false, avail:"1 UNIT AVAILABLE",
     meta:"Shared home | 7 units | 185 m²",   perks:["Terrace","Projection room","Veranda"],
-    price:"from €1,133", priceShort:"€1,133", priceNum:1133, oldPrice:null, discount:null,
-    img:"brabo.jpeg",            lat:48.840, lng:2.300, lines:["T3a","M6"] },
-
-  { id:20, page:2, name:"Amélie",            city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",          opening:null,
+    price:"from €1,133", priceShort:"€1,133", oldPrice:null, discount:null, opening:null,
+    img:"brabo.jpeg",            lat:48.844, lng:2.316, lines:["M4"] },
+  { id:20, page:2, name:"Amélie",            city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 14 units | 350 m²",  perks:["Terrace"],
-    price:"from €1,345", priceShort:"€1,345", priceNum:1345, oldPrice:null, discount:null,
-    img:"am%C3%A9lie.jpeg",      lat:48.843, lng:2.280, lines:["T3a","T2"] },
-
-  // ── PAGE 3 ──────────────────────────────────────────
-  { id:21, page:3, name:"Helios 504",        city:"Paris", type:"Private Flat", xxl:true, avail:"ENTIRE FLAT AVAILABLE",       opening:null,
+    price:"from €1,345", priceShort:"€1,345", oldPrice:null, discount:null, opening:null,
+    img:"amélie.jpeg",           lat:48.836, lng:2.281, lines:["M4"] },
+  // PAGE 3
+  { id:21, page:3, name:"Helios 504",        city:"Paris", type:"Private Flat", xxl:true,  avail:"ENTIRE FLAT AVAILABLE",
     meta:"Private flat | Studio | 13 m²",    perks:[],
-    price:"€1,550",      priceShort:"€1,550", priceNum:1550, oldPrice:null, discount:null,
-    img:"helios-504.jpeg",       lat:48.881, lng:2.298, lines:["RER_C","T3b"] },
-
-  { id:22, page:3, name:"Helios 307",        city:"Paris", type:"Private Flat", xxl:true, avail:"AVAILABLE ON 08 JUNE 2026",   opening:null,
+    price:"€1,550",      priceShort:"€1,550", oldPrice:null, discount:null, opening:null,
+    img:"helios-504.jpeg",       lat:48.881, lng:2.297, lines:["RER_C","T3b"] },
+  { id:22, page:3, name:"Helios 307",        city:"Paris", type:"Private Flat", xxl:true,  avail:"AVAILABLE ON 08 JUNE 2026",
     meta:"Private flat | Studio | 15 m²",    perks:[],
-    price:"€1,550",      priceShort:"€1,550", priceNum:1550, oldPrice:null, discount:null,
-    img:"helios-307.jpeg",       lat:48.879, lng:2.296, lines:["RER_C","T3b"] },
-
-  { id:23, page:3, name:"Jumo Home 11.02",   city:"Paris", type:"Coliving",    xxl:true,  avail:"3 UNITS AVAILABLE",          opening:null,
+    price:"€1,550",      priceShort:"€1,550", oldPrice:null, discount:null, opening:null,
+    img:"helios-307.jpeg",       lat:48.880, lng:2.295, lines:["RER_C","T3b"] },
+  { id:23, page:3, name:"Jumo Home 11.02",   city:"Paris", type:"Coliving",    xxl:true,  avail:"3 UNITS AVAILABLE",
     meta:"Shared home | 12 units | 380 m²",  perks:[],
-    price:"from €1,720", priceShort:"€1,720", priceNum:1720, oldPrice:null, discount:null,
-    img:"jumo-home-11.02.png",   lat:48.857, lng:2.296, lines:["T2","M7"] },
+    price:"from €1,720", priceShort:"€1,720", oldPrice:null, discount:null, opening:null,
+    img:"jumo-home-11.02.png",   lat:48.848, lng:2.300, lines:["M12","T3b"] },
 ];
 
 /* ═══════════════════════════════════════════════════════
@@ -468,23 +444,71 @@ function promoHowItWorksHTML() {
 }
 
 /* ═══════════════════════════════════════════════════════
-   TRANSPORT LINES
+   TRANSPORT LINES  – polyline route + station logo markers
+   Each line renders: (1) a coloured polyline along `route`
+                      (2) a logo icon at each `stations` point
 ═══════════════════════════════════════════════════════ */
-const STEP = 0.045;
-function interp(wpts,step){const pts=[];for(let i=0;i<wpts.length-1;i++){const[y1,x1]=wpts[i],[y2,x2]=wpts[i+1];const d=Math.hypot(y2-y1,x2-x1),n=Math.max(1,Math.round(d/step));for(let j=0;j<n;j++)pts.push([y1+(y2-y1)*j/n,x1+(x2-x1)*j/n]);}pts.push(wpts[wpts.length-1]);return pts;}
-function logoEl(label,bg,fg,shape,size){const d=document.createElement('div');d.style.cssText=[`width:${size}px`,`height:${size}px`,`background:${bg}`,`color:${fg}`,`border-radius:${shape==='circle'?'50%':'4px'}`,`display:flex`,`align-items:center`,`justify-content:center`,`font-size:${size<=16?7.5:8.5}px`,`font-weight:900`,`font-family:sans-serif`,`line-height:1`,`user-select:none`,`box-shadow:0 1px 2px rgba(0,0,0,.35)`,`pointer-events:none`].join(';');d.textContent=label;return d;}
+function logoEl(label,bg,fg,shape,size){
+  const d=document.createElement('div');
+  d.style.cssText=[`width:${size}px`,`height:${size}px`,`background:${bg}`,`color:${fg}`,
+    `border-radius:${shape==='circle'?'50%':'4px'}`,`display:flex`,`align-items:center`,
+    `justify-content:center`,`font-size:${size<=16?8:9}px`,`font-weight:900`,
+    `font-family:sans-serif`,`line-height:1`,`user-select:none`,
+    `box-shadow:0 1px 3px rgba(0,0,0,.4)`,`pointer-events:none`,
+    `border:1.5px solid rgba(255,255,255,.7)`].join(';');
+  d.textContent=label; return d;
+}
 
 const LINE_DEFS = {
-  RER_C:{label:'C',bg:'#f5c800',fg:'#1a1200',shape:'circle',sz:16,wpt:[[49.052,2.082],[48.978,2.074],[48.940,2.073],[48.926,2.190],[48.912,2.212],[48.895,2.243],[48.875,2.275],[48.860,2.295],[48.853,2.312],[48.851,2.330],[48.849,2.349],[48.848,2.366],[48.837,2.378],[48.820,2.380],[48.800,2.381],[48.775,2.381],[48.750,2.379],[48.725,2.375],[48.694,2.383],[48.672,2.366],[48.670,2.330],[48.685,2.276],[48.710,2.228],[48.735,2.195],[48.762,2.167],[48.803,2.133],[48.793,2.097],[48.780,2.065],[48.800,2.078],[48.820,2.100],[48.838,2.120],[48.852,2.148],[48.860,2.162],[48.864,2.193]]},
-  T3b:{label:'3b',bg:'#73c2a0',fg:'#fff',shape:'round',sz:16,wpt:[[48.848,2.429],[48.847,2.414],[48.844,2.397],[48.835,2.406],[48.822,2.402],[48.812,2.391],[48.804,2.378],[48.795,2.367],[48.782,2.355],[48.778,2.341],[48.787,2.326],[48.800,2.316],[48.813,2.307],[48.822,2.294],[48.823,2.278],[48.832,2.265],[48.840,2.250],[48.843,2.237]]},
-  T3a:{label:'3a',bg:'#73c2a0',fg:'#fff',shape:'round',sz:16,wpt:[[48.843,2.238],[48.836,2.218],[48.825,2.206],[48.814,2.214],[48.811,2.229],[48.812,2.248],[48.820,2.262],[48.827,2.277],[48.828,2.293],[48.822,2.310],[48.815,2.325],[48.810,2.345],[48.812,2.362],[48.820,2.375]]},
-  T2: {label:'2',bg:'#7c5cbf',fg:'#fff',shape:'circle',sz:16,wpt:[[48.836,2.233],[48.841,2.248],[48.849,2.263],[48.858,2.274],[48.868,2.279],[48.875,2.286],[48.883,2.268],[48.887,2.250],[48.891,2.234],[48.895,2.225],[48.899,2.233]]},
-  M7: {label:'7',bg:'#e8a5b0',fg:'#fff',shape:'circle',sz:16,wpt:[[48.912,2.363],[48.900,2.360],[48.888,2.357],[48.875,2.353],[48.863,2.350],[48.853,2.347],[48.843,2.344],[48.835,2.347],[48.825,2.352],[48.814,2.361],[48.803,2.363],[48.793,2.362]]},
-  M6: {label:'6',bg:'#89c059',fg:'#fff',shape:'circle',sz:16,wpt:[[48.853,2.295],[48.848,2.308],[48.843,2.323],[48.838,2.338],[48.833,2.353],[48.828,2.368],[48.825,2.383],[48.828,2.398],[48.835,2.410],[48.840,2.425]]},
-  M13:{label:'13',bg:'#91d3e8',fg:'#006078',shape:'circle',sz:16,wpt:[[48.940,2.300],[48.924,2.297],[48.914,2.293],[48.903,2.290],[48.892,2.286],[48.878,2.285],[48.864,2.295],[48.853,2.308],[48.842,2.322],[48.834,2.337]]},
-  RER_A:{label:'A',bg:'#d62a2a',fg:'#fff',shape:'circle',sz:16,wpt:[[48.878,2.047],[48.882,2.090],[48.884,2.135],[48.886,2.173],[48.887,2.210],[48.883,2.250],[48.878,2.283],[48.874,2.313],[48.871,2.347],[48.869,2.368],[48.862,2.396],[48.856,2.432],[48.849,2.533]]},
-  RER_B:{label:'B',bg:'#357bca',fg:'#fff',shape:'circle',sz:16,wpt:[[48.990,2.353],[48.968,2.353],[48.944,2.352],[48.920,2.351],[48.900,2.350],[48.878,2.349],[48.857,2.347],[48.837,2.344],[48.817,2.336],[48.793,2.316],[48.775,2.307],[48.754,2.303]]},
-  RER_D:{label:'D',bg:'#3da05a',fg:'#fff',shape:'circle',sz:16,wpt:[[48.970,2.380],[48.950,2.373],[48.936,2.365],[48.920,2.359],[48.905,2.358],[48.890,2.357],[48.875,2.356],[48.860,2.358],[48.845,2.360],[48.830,2.365],[48.815,2.370],[48.800,2.378]]},
+  // ── RER C  gold/yellow – big horseshoe Pontoise→Paris→Versailles
+  RER_C:{label:'C',bg:'#f5c800',fg:'#1a1200',shape:'circle',sz:15,color:'#f5c800',
+    route:[[49.052,2.082],[48.985,2.075],[48.955,2.107],[48.935,2.163],[48.924,2.190],[48.912,2.212],[48.895,2.243],[48.875,2.275],[48.861,2.295],[48.853,2.312],[48.851,2.330],[48.849,2.349],[48.848,2.366],[48.837,2.378],[48.820,2.380],[48.800,2.381],[48.775,2.381],[48.750,2.379],[48.725,2.375],[48.695,2.383],[48.672,2.366],[48.670,2.330],[48.685,2.276],[48.710,2.228],[48.735,2.195],[48.762,2.167],[48.803,2.133],[48.793,2.097],[48.780,2.065],[48.800,2.078],[48.838,2.120],[48.852,2.148],[48.860,2.162],[48.864,2.193]],
+    stations:[[49.052,2.082],[48.924,2.190],[48.861,2.295],[48.849,2.349],[48.820,2.380],[48.750,2.379],[48.695,2.383],[48.670,2.330],[48.710,2.228],[48.762,2.167],[48.803,2.133],[48.864,2.193]]},
+
+  // ── Transilien J  dark gold – Saint-Lazare→Argenteuil→Pontoise/Cergy
+  J:{label:'J',bg:'#d5b800',fg:'#1a1200',shape:'circle',sz:15,color:'#d5b800',
+    route:[[48.876,2.325],[48.890,2.305],[48.899,2.287],[48.912,2.268],[48.922,2.257],[48.936,2.240],[48.948,2.217],[48.958,2.192],[48.975,2.168],[48.993,2.145],[49.012,2.113],[49.033,2.098],[49.052,2.082]],
+    stations:[[48.876,2.325],[48.912,2.268],[48.936,2.240],[48.958,2.192],[48.975,2.168],[49.033,2.098],[49.052,2.082]]},
+
+  // ── Transilien L  purple – Saint-Lazare→La Défense→Versailles
+  L:{label:'L',bg:'#7b4f9e',fg:'#fff',shape:'circle',sz:15,color:'#7b4f9e',
+    route:[[48.876,2.325],[48.882,2.309],[48.887,2.295],[48.893,2.275],[48.893,2.258],[48.897,2.240],[48.902,2.228],[48.890,2.210],[48.875,2.185],[48.860,2.162],[48.840,2.150],[48.820,2.148]],
+    stations:[[48.876,2.325],[48.893,2.275],[48.897,2.240],[48.902,2.228],[48.875,2.185],[48.820,2.148]]},
+
+  // ── RER A  red – east-west axis
+  RER_A:{label:'A',bg:'#E2231A',fg:'#fff',shape:'circle',sz:15,color:'#E2231A',
+    route:[[48.898,2.099],[48.887,2.140],[48.886,2.177],[48.888,2.211],[48.891,2.240],[48.893,2.258],[48.886,2.286],[48.878,2.295],[48.875,2.309],[48.871,2.330],[48.864,2.350],[48.851,2.394],[48.848,2.413],[48.847,2.456],[48.845,2.545]],
+    stations:[[48.898,2.099],[48.893,2.258],[48.878,2.295],[48.864,2.350],[48.851,2.394],[48.848,2.413],[48.845,2.545]]},
+
+  // ── M4  magenta – north-south through Paris (Clignancourt→Bagneux)
+  M4:{label:'4',bg:'#BE0055',fg:'#fff',shape:'circle',sz:15,color:'#BE0055',
+    route:[[48.900,2.351],[48.884,2.352],[48.880,2.355],[48.876,2.359],[48.871,2.354],[48.863,2.351],[48.858,2.348],[48.852,2.346],[48.843,2.332],[48.838,2.326],[48.829,2.323],[48.820,2.322],[48.808,2.317],[48.798,2.310],[48.790,2.305]],
+    stations:[[48.900,2.351],[48.880,2.355],[48.858,2.348],[48.838,2.326],[48.808,2.317],[48.790,2.305]]},
+
+  // ── M5  orange – Bobigny→Place d'Italie
+  M5:{label:'5',bg:'#F97B00',fg:'#fff',shape:'circle',sz:15,color:'#F97B00',
+    route:[[48.832,2.354],[48.842,2.364],[48.849,2.370],[48.853,2.370],[48.863,2.372],[48.869,2.372],[48.867,2.364],[48.869,2.360],[48.876,2.359],[48.881,2.363],[48.884,2.377],[48.887,2.388],[48.886,2.408],[48.893,2.425],[48.905,2.452]],
+    stations:[[48.832,2.354],[48.853,2.370],[48.867,2.364],[48.876,2.359],[48.884,2.377],[48.905,2.452]]},
+
+  // ── M7  rose pink – La Courneuve→Villejuif
+  M7:{label:'7',bg:'#F197A2',fg:'#111',shape:'circle',sz:15,color:'#F197A2',
+    route:[[48.921,2.390],[48.904,2.386],[48.893,2.378],[48.886,2.380],[48.883,2.375],[48.869,2.357],[48.866,2.351],[48.860,2.347],[48.858,2.344],[48.862,2.334],[48.855,2.338],[48.849,2.347],[48.843,2.354],[48.838,2.358],[48.832,2.354],[48.823,2.357],[48.812,2.364],[48.800,2.375]],
+    stations:[[48.921,2.390],[48.883,2.375],[48.862,2.334],[48.849,2.347],[48.832,2.354],[48.800,2.375]]},
+
+  // ── M12  dark green – Mairie d'Issy→Front Populaire
+  M12:{label:'12',bg:'#007852',fg:'#fff',shape:'circle',sz:15,color:'#007852',
+    route:[[48.826,2.271],[48.831,2.278],[48.836,2.287],[48.843,2.302],[48.851,2.317],[48.856,2.323],[48.866,2.330],[48.873,2.325],[48.876,2.326],[48.883,2.316],[48.886,2.329],[48.890,2.330],[48.896,2.339],[48.910,2.346],[48.920,2.350],[48.936,2.361]],
+    stations:[[48.826,2.271],[48.843,2.302],[48.856,2.323],[48.866,2.330],[48.876,2.326],[48.883,2.316],[48.896,2.339],[48.936,2.361]]},
+
+  // ── M13  teal – Châtillon→Saint-Denis
+  M13:{label:'13',bg:'#4EB6AE',fg:'#fff',shape:'circle',sz:15,color:'#4EB6AE',
+    route:[[48.820,2.294],[48.831,2.294],[48.843,2.296],[48.851,2.308],[48.861,2.311],[48.869,2.317],[48.876,2.335],[48.879,2.336],[48.883,2.333],[48.887,2.327],[48.898,2.333],[48.906,2.329],[48.920,2.323],[48.940,2.323]],
+    stations:[[48.820,2.294],[48.843,2.296],[48.869,2.317],[48.876,2.335],[48.879,2.336],[48.898,2.333],[48.940,2.323]]},
+
+  // ── T3b  dark teal – outer ring east side (Vincennes→Pont du Garigliano)
+  T3b:{label:'3b',bg:'#73c2a0',fg:'#fff',shape:'round',sz:15,color:'#73c2a0',
+    route:[[48.848,2.429],[48.847,2.414],[48.844,2.397],[48.835,2.406],[48.822,2.402],[48.812,2.391],[48.804,2.378],[48.795,2.367],[48.782,2.355],[48.778,2.341],[48.787,2.326],[48.800,2.316],[48.813,2.307],[48.822,2.294],[48.823,2.278],[48.832,2.265],[48.840,2.250],[48.843,2.237]],
+    stations:[[48.848,2.429],[48.844,2.397],[48.822,2.402],[48.804,2.378],[48.782,2.355],[48.778,2.341],[48.800,2.316],[48.813,2.307],[48.823,2.278],[48.832,2.265],[48.843,2.237]]},
 };
 
 /* ═══════════════════════════════════════════════════════
@@ -498,7 +522,7 @@ let filteredIds=null; // null = show by page; array = map filter active
 /* ═══════════════════════════════════════════════════════
    CLUSTERING
 ═══════════════════════════════════════════════════════ */
-function buildClusters(props, thr=0.015){
+function buildClusters(props, thr=0.008){
   const used=new Set(), clusters=[];
   props.forEach(p=>{
     if(used.has(p.id))return;
@@ -602,9 +626,13 @@ function goToPage(n){
 function buildLineGroups(){
   Object.entries(LINE_DEFS).forEach(([id,def])=>{
     const grp=L.layerGroup();
-    interp(def.wpt,STEP).forEach(([lat,lng])=>{
+    // 1. Coloured polyline connecting all route waypoints
+    L.polyline(def.route,{color:def.color,weight:4.5,opacity:.9,lineJoin:'round',lineCap:'round'}).addTo(grp);
+    // 2. Station logo at each explicit station position
+    def.stations.forEach(([lat,lng])=>{
       const el=logoEl(def.label,def.bg,def.fg,def.shape,def.sz);
-      L.marker([lat,lng],{icon:L.divIcon({html:el,className:'',iconSize:[def.sz,def.sz],iconAnchor:[def.sz/2,def.sz/2]}),interactive:false}).addTo(grp);
+      const sz=def.sz;
+      L.marker([lat,lng],{icon:L.divIcon({html:el,className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]}),interactive:false}).addTo(grp);
     });
     lineGroups[id]=grp;
   });
