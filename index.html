@@ -309,7 +309,7 @@
       To return to the full list, use the <strong>"Filtered by map area. Clear"</strong> button that appears at the bottom of the screen.
     </p>
     <p style="font-size:13px;line-height:1.65;color:#111;text-align:center;width:100%;margin-bottom:40px;">
-      <em>Note: The focus of this prototype is the map functionality. As a result,<br>the top navigation menu and search filters are not currently functional.</em>
+      <em>Note: The focus of this prototype is the map functionality and property listing.<br>As a result, the top navigation menu and search filters are not currently functional.</em>
     </p>
     <button onclick="document.getElementById('splashScreen').style.display='none'" style="
       background:#039191;color:white;border:none;border-radius:5px;
@@ -393,6 +393,27 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       Filtered by map area
       <button onclick="clearMapFilter()">✕ Clear</button>
+    </div>
+  </div>
+</div>
+
+<!-- HELP BUTTON -->
+<div style="position:fixed;bottom:24px;right:24px;z-index:500;">
+  <div style="position:relative;display:inline-flex;">
+    <button onclick="document.getElementById('splashScreen').style.display='flex'"
+      style="width:34px;height:34px;border-radius:50%;background:white;border:1.5px solid #111;
+        font-size:14px;font-weight:700;color:#111;cursor:pointer;font-family:inherit;
+        display:flex;align-items:center;justify-content:center;
+        transition:background .15s,color .15s;line-height:1;"
+      onmouseover="this.style.background='#111';this.style.color='white';this.nextElementSibling.style.opacity='1'"
+      onmouseout="this.style.background='white';this.style.color='#111';this.nextElementSibling.style.opacity='0'"
+    >?</button>
+    <div style="position:absolute;bottom:calc(100% + 8px);right:0;
+      background:#111;color:white;font-size:12px;font-weight:500;
+      padding:6px 10px;border-radius:5px;white-space:nowrap;
+      pointer-events:none;opacity:0;transition:opacity .15s;font-family:-apple-system,'Helvetica Neue',sans-serif;">
+      Back to prototype introduction
+      <div style="position:absolute;top:100%;right:12px;border:5px solid transparent;border-top-color:#111;"></div>
     </div>
   </div>
 </div>
