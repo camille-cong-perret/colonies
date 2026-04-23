@@ -27,7 +27,7 @@
     nav{height:65px;background:var(--bg);border-bottom:1px solid var(--border);
       display:flex;align-items:center;padding:0 28px;gap:28px;flex-shrink:0;
       position:sticky;top:0;z-index:300}
-    .site-logo{height:64px;width:auto;display:block}
+    .site-logo{height:32px;width:auto;display:block}
     .nav-links{display:flex;gap:36px;margin-left:8px}
     .nav-links a{font-size:16px;color:var(--text);text-decoration:none;font-weight:400;display:inline-flex;align-items:center;gap:4px}
     .nav-links a:hover{opacity:.7}
@@ -268,19 +268,19 @@
   position:fixed;inset:0;z-index:9999;
   background:#f8f3eb;
   display:flex;flex-direction:column;align-items:center;
-  padding:40px 24px;
+  padding:40px 24px 40px;
 ">
   <img id="splash-logo" src="" alt="colonies" style="height:78px;width:auto;display:block;margin-bottom:10px"/>
   <p style="font-size:13px;color:#111;font-weight:400;letter-spacing:.3px;">by Camille Cong Perret</p>
 
-  <div style="max-width:680px;width:100%;display:flex;flex-direction:column;align-items:center;gap:0;margin-top:96px">
-    <p style="
-      font-size:15.5px;line-height:1.75;color:#111;
-      text-align:center;width:100%;
-      margin-bottom:40px;
-    ">
+  <!-- Text block: absolutely centered on screen -->
+  <div style="position:absolute;top:58%;left:50%;transform:translate(-50%,-50%);max-width:680px;width:calc(100% - 48px);display:flex;flex-direction:column;align-items:center;">
+    <p style="font-size:15.5px;line-height:1.75;color:#111;text-align:center;width:100%;margin-bottom:40px;">
       This prototype recreates the <strong>Housing in Paris</strong> interface with a focus on improving localized discovery. While the original platform filters by city, this version introduces <strong>Dynamic Map Search</strong> to help you find a home in specific neighborhoods or arrondissements.<br><br>
       By zooming in, out, or navigating the map, a <strong>"Search this area"</strong> call to action will appear. Selecting it instantly syncs the property list to display only the homes visible within your current map view. To return to the full list, use the <strong>"Filtered by map area. Clear"</strong> button that appears at the bottom of the screen.
+    </p>
+    <p style="font-size:13px;line-height:1.65;color:#111;text-align:center;width:100%;margin-bottom:40px;">
+      <em>Note: The focus of this prototype is the map functionality. As a result,<br>the top navigation menu and search filters are not currently functional.</em>
     </p>
     <button onclick="document.getElementById('splashScreen').style.display='none'" style="
       background:#039191;color:white;border:none;border-radius:5px;
