@@ -29,7 +29,7 @@
       position:sticky;top:0;z-index:300}
     .site-logo{height:64px;width:auto;display:block}
     .nav-links{display:flex;gap:36px;margin-left:8px}
-    .nav-links a{font-size:16px;color:var(--text);text-decoration:none;font-weight:400}
+    .nav-links a{font-size:16px;color:var(--text);text-decoration:none;font-weight:400;display:inline-flex;align-items:center;gap:4px}
     .nav-links a:hover{opacity:.7}
     .nav-right{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:16px;font-weight:400}
     .nav-right a{color:var(--text);text-decoration:none;display:flex;align-items:center;gap:6px}
@@ -271,13 +271,11 @@
   padding:40px 24px;
 ">
   <div style="max-width:560px;width:100%;display:flex;flex-direction:column;align-items:center;gap:0">
-    <img id="splash-logo" src="" alt="colonies" style="height:52px;width:auto;display:block;margin-bottom:10px"/>
-    <p style="font-size:13px;color:#6b7280;font-weight:400;letter-spacing:.3px;margin-bottom:48px">by Camille Cong Perret</p>
+    <img id="splash-logo" src="" alt="colonies" style="height:104px;width:auto;display:block;margin-bottom:10px"/>
+    <p style="font-size:13px;color:#111;font-weight:400;letter-spacing:.3px;margin-bottom:48px">by Camille Cong Perret</p>
     <p style="
       font-size:15.5px;line-height:1.75;color:#111;
-      text-align:left;width:100%;
-      border-top:1px solid #d9cfc0;
-      padding-top:32px;
+      text-align:center;width:100%;
       margin-bottom:40px;
     ">
       This prototype recreates the <strong>Housing in Paris</strong> interface with a focus on improving localized discovery. While the original platform filters by city, this version introduces <strong>Dynamic Map Search</strong> to help you find a home in specific neighborhoods or arrondissements.<br><br>
@@ -300,14 +298,14 @@
   <!-- Set GITHUB constant below, then logo loads automatically -->
   <img id="site-logo" class="site-logo" alt="colonies" src=""/>
   <div class="nav-links">
-    <a href="#">Find my home ▾</a>
-    <a href="#">Home types ▾</a>
+    <a href="#">Find my home <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+    <a href="#">Home types <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
     <a href="#">Corporate offers</a>
-    <a href="#">Invest with us ▾</a>
-    <a href="#">About us ▾</a>
+    <a href="#">Invest with us <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+    <a href="#">About us <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
   </div>
   <div class="nav-right">
-    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> EN ▾</a>
+    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> EN <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
     <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Login</a>
   </div>
 </nav>
