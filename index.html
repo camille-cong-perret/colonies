@@ -70,11 +70,11 @@
     .main{display:grid;grid-template-columns:minmax(0,880px) 1fr;align-items:start}
 
     /* LIST PANEL */
-    .list-panel{padding:26px 30px 40px;background:var(--bg);display:flex;flex-direction:column;
+    .list-panel{padding:26px 40px 40px;background:var(--bg);display:flex;flex-direction:column;
       height:calc(100vh - 130px);overflow-y:auto;position:sticky;top:130px}
     .list-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
     .list-header h1{font-size:46px;font-weight:400;letter-spacing:-.3px}
-    .list-header h1 strong{font-weight:800}
+    .list-header h1 strong{font-weight:600}
     #resultCount{font-size:13.5px;color:var(--text)}
     .badges{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
     .feat-badge{display:flex;align-items:center;gap:6px;background:var(--white);
@@ -153,13 +153,13 @@
     .no-results{text-align:center;padding:56px 24px;color:var(--muted);display:none;font-size:14px;line-height:1.6}
 
     /* PAGINATION */
-    .pagination{display:flex;align-items:center;justify-content:center;gap:6px;padding:20px 0 8px;flex-shrink:0}
-    .page-arrow{background:none;border:none;font-size:20px;cursor:pointer;color:var(--text);
-      padding:0 6px;line-height:1;font-family:serif;opacity:.6;transition:opacity .15s}
-    .page-arrow:hover{opacity:1}
-    .page-arrow:disabled{opacity:.2;cursor:default}
+    .pagination{display:flex;align-items:center;justify-content:center;gap:10px;padding:28px 0 12px;flex-shrink:0}
+    .page-arrow{background:none;border:none;font-size:28px;cursor:pointer;color:#111;
+      padding:0 6px;line-height:1;font-family:serif;opacity:1;transition:opacity .15s}
+    .page-arrow:hover{opacity:.6}
+    .page-arrow.hidden{visibility:hidden;pointer-events:none}
     .page-num{background:none;border:1.5px solid transparent;border-radius:50%;
-      width:36px;height:36px;font-size:14px;font-weight:500;font-family:inherit;
+      width:42px;height:42px;font-size:16px;font-weight:500;font-family:inherit;
       cursor:pointer;color:var(--text);transition:all .15s;display:flex;align-items:center;justify-content:center}
     .page-num:hover{border-color:var(--border)}
     .page-num.active{border-color:var(--text);border-width:2px;font-weight:700}
@@ -497,7 +497,7 @@ const ALL_PROPERTIES = [
   { id:20, page:2, name:"Amélie",            city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 14 units | 350 m²",  perks:["Terrace"],
     price:"from €1,345", priceShort:"€1,345", oldPrice:null, discount:null, opening:null,
-    img:"amélie.jpeg",           lat:48.836, lng:2.281, lines:["M4"] },
+    img:"amelie.jpeg",           lat:48.836, lng:2.281, lines:["M4"] },
   // PAGE 3
   { id:21, page:3, name:"Helios 504",        city:"Paris", type:"Private Flat", xxl:true,  avail:"ENTIRE FLAT AVAILABLE",
     meta:"Private flat | Studio | 13 m²",    perks:[],
@@ -719,9 +719,9 @@ function renderCards(){
 function renderPagination(){
   const pg=document.getElementById('pagination');
   pg.innerHTML=`
-    <button class="page-arrow" id="prevBtn" ${currentPage===1?'disabled':''}>‹</button>
+    <button class="page-arrow${currentPage===1?' hidden':''}" id="prevBtn">‹</button>
     ${[1,2,3].map(n=>`<button class="page-num${n===currentPage?' active':''}" onclick="goToPage(${n})">${n}</button>`).join('')}
-    <button class="page-arrow" id="nextBtn" ${currentPage===3?'disabled':''}>›</button>`;
+    <button class="page-arrow${currentPage===3?' hidden':''}" id="nextBtn">›</button>`;
   document.getElementById('prevBtn').onclick=()=>goToPage(currentPage-1);
   document.getElementById('nextBtn').onclick=()=>goToPage(currentPage+1);
 }
