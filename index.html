@@ -9,7 +9,7 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --teal:#0f9e8f; --teal-dark:#0b7d71;
+      --teal:#039191; --teal-dark:#027070;
       --bg:#f8f3eb;
       --filter-bar:#ecddbe;
       --text:#111; --muted:#6b7280;
@@ -171,12 +171,12 @@
 
     /* MARKERS */
     .marker-wrap{position:relative;display:flex;align-items:center;justify-content:center;overflow:visible}
-    .map-dot{width:16px;height:16px;background:var(--teal);border:1.5px solid white;
+    .map-dot{width:16px;height:16px;background:var(--teal);border:1px solid white;
       border-radius:50%!important;box-shadow:0 1px 5px rgba(0,0,0,.25);cursor:pointer;
       transition:transform .15s,background .15s,border-color .15s;
       will-change:transform;transform:translateZ(0);backface-visibility:hidden;flex-shrink:0}
     .map-dot.hov{transform:translateZ(0) scale(1.3);background:white;border:2px solid #111!important}
-    .map-cluster{background:var(--teal);border:2px solid white;border-radius:50%!important;
+    .map-cluster{background:var(--teal);border:1px solid white;border-radius:50%!important;
       display:flex;align-items:center;justify-content:center;font-weight:700;color:white;
       box-shadow:0 2px 8px rgba(0,0,0,.22);cursor:pointer;
       transition:transform .15s,background .15s,border-color .15s,color .15s;
@@ -623,15 +623,18 @@ function goToPage(n){
 /* ═══════════════════════════════════════════════════════
    MAP INIT
 ═══════════════════════════════════════════════════════ */
+function interp(wpts,step){const pts=[];for(let i=0;i<wpts.length-1;i++){const[y1,x1]=wpts[i],[y2,x2]=wpts[i+1];const d=Math.hypot(y2-y1,x2-x1),n=Math.max(1,Math.round(d/step));for(let j=0;j<n;j++)pts.push([y1+(y2-y1)*j/n,x1+(x2-x1)*j/n]);}pts.push(wpts[wpts.length-1]);return pts;}
+
 function buildLineGroups(){
   Object.entries(LINE_DEFS).forEach(([id,def])=>{
     const grp=L.layerGroup();
-    // 1. Coloured polyline connecting all route waypoints
+    // 1. Coloured polyline
     L.polyline(def.route,{color:def.color,weight:4.5,opacity:.9,lineJoin:'round',lineCap:'round'}).addTo(grp);
-    // 2. Station logo at each explicit station position
-    def.stations.forEach(([lat,lng])=>{
-      const el=logoEl(def.label,def.bg,def.fg,def.shape,def.sz);
-      const sz=def.sz;
+    // 2. Dense logo markers every ~1.5km (STEP 0.014°) along the full route
+    const pts=interp(def.route, 0.014);
+    const sz=def.sz;
+    pts.forEach(([lat,lng])=>{
+      const el=logoEl(def.label,def.bg,def.fg,def.shape,sz);
       L.marker([lat,lng],{icon:L.divIcon({html:el,className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]}),interactive:false}).addTo(grp);
     });
     lineGroups[id]=grp;
