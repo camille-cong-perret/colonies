@@ -953,9 +953,10 @@ function showMapPopup(ids, idx){
       // Use spacer divs (not padding) for reliable cross-browser scroll room
       const pad = Math.round((vp.offsetWidth - cardW) / 2);
       const makespacer = ()=>{ const d=document.createElement('div'); d.style.cssText=`flex:0 0 ${pad}px;width:${pad}px;height:1px;`; return d; };
-      track2.insertBefore(makespacer(), track2.firstChild);
+      track2.insertBefore(makespacer(), track2.firstElementChild);
       track2.appendChild(makespacer());
-      vp.scrollLeft = 0;
+      // Scroll exactly to the pad offset so first card is centred
+      vp.scrollLeft = pad;
       updateNavState();
     });
   });
