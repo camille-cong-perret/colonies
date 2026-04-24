@@ -242,7 +242,7 @@
     .mp-carousel-track{
       display:flex;
       gap:45px;          /* gap between cards */
-      padding:0 10%;     /* (100%-80%)/2 = 10% so first/last card centre */
+      padding:0;
     }
     /* Each card slot: narrower than 100% so neighbors peek */
     .mp-card-slot{
@@ -944,6 +944,14 @@ function showMapPopup(ids, idx){
       const vp = document.getElementById('mpViewport');
       if(!vp) return;
       // Compute padding so first/last card can be perfectly centred
+      // Padding so first/last card centres in viewport
+      const slot = vp.querySelector('.mp-card-slot');
+      const track = document.getElementById('mpTrack');
+      if(slot && track){
+        const pad = Math.max(0, Math.round((vp.offsetWidth - slot.offsetWidth) / 2));
+        track.style.paddingLeft  = pad + 'px';
+        track.style.paddingRight = pad + 'px';
+      }
       vp.scrollLeft = 0;
       updateNavState();
     });
