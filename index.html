@@ -945,15 +945,16 @@ function showMapPopup(ids, idx){
       if(!vp) return;
       // Compute padding so first/last card can be perfectly centred
       const track2 = document.getElementById('mpTrack');
-      // 1. Reset padding so measurement is clean
       if(track2){ track2.style.paddingLeft='0'; track2.style.paddingRight='0'; }
-      // 2. Set each slot to exactly 80% of viewport width
+      // Set each card slot to exactly 80% of viewport
       const slots2 = vp.querySelectorAll('.mp-card-slot');
       const cardW = Math.round(vp.offsetWidth * 0.80);
-      slots2.forEach(s=>{ s.style.width = cardW+'px'; });
-      // 3. Now compute and set padding to centre first/last
+      slots2.forEach(s=>{ s.style.width = cardW+'px'; s.style.flexShrink='0'; });
+      // Use spacer divs (not padding) for reliable cross-browser scroll room
       const pad = Math.round((vp.offsetWidth - cardW) / 2);
-      if(track2){ track2.style.paddingLeft=pad+'px'; track2.style.paddingRight=pad+'px'; }
+      const makespacer = ()=>{ const d=document.createElement('div'); d.style.cssText=`flex:0 0 ${pad}px;width:${pad}px;height:1px;`; return d; };
+      track2.insertBefore(makespacer(), track2.firstChild);
+      track2.appendChild(makespacer());
       vp.scrollLeft = 0;
       updateNavState();
     });
