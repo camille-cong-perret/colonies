@@ -228,21 +228,25 @@
     /* Carousel viewport — clips cards horizontally, allows shadow top/bottom */
     .mp-carousel-viewport{
       width:100%;
-      overflow-x:hidden;
+      overflow-x:scroll;
       overflow-y:visible;
       position:relative;
-      padding:4px 0;   /* room for box-shadow top + bottom */
+      padding:4px 0;
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
+      /* hide scrollbar */
+      scrollbar-width:none;
     }
-    /* Track holds all cards in a row, slides via transform */
+    .mp-carousel-viewport::-webkit-scrollbar{display:none}
+    /* Track: natural flex row, no transform needed */
     .mp-carousel-track{
       display:flex;
-      transition:transform .35s cubic-bezier(.4,0,.2,1);
-      will-change:transform;
+      gap:12px;          /* gap between cards */
+      padding:0 40px;    /* side padding so first/last card can center */
     }
-    /* Each card slot */
+    /* Each card slot: narrower than 100% so neighbors peek */
     .mp-card-slot{
-      flex:0 0 100%;
-      padding:0 60px; /* peek space */
+      flex:0 0 80%;      /* 80% width → 20% of neighbors visible */
       box-sizing:border-box;
     }
     /* The actual card */
@@ -823,26 +827,15 @@ function initMap(){
   map.on('moveend zoomend',()=>{clearTimeout(moveTimeout);moveTimeout=setTimeout(showSearchHere,350);});
 }
 
-/* ── Trackpad horizontal scroll on carousel ── */
+/* ── Trackpad: natural horizontal scroll on carousel ── */
 (function(){
   const vp = document.getElementById('mpViewport');
   if(!vp) return;
-  let accumulated = 0;
-  const THRESHOLD = 60;
-  let locked = false;
-
+  // Let horizontal trackpad scroll flow naturally into the scrollable viewport
   vp.addEventListener('wheel', e=>{
-    // Only act on horizontal scroll (trackpad two-finger swipe)
-    if(Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
-    e.preventDefault();
-    if(locked) return;
-    accumulated += e.deltaX;
-    if(Math.abs(accumulated) > THRESHOLD){
-      locked = true;
-      if(accumulated > 0) mpNavigate(1);   // swipe left → next
-      else                mpNavigate(-1);  // swipe right → prev
-      accumulated = 0;
-      setTimeout(()=>{ locked=false; }, 500); // cooldown between flips
+    if(Math.abs(e.deltaX) >= Math.abs(e.deltaY)){
+      e.preventDefault();
+      vp.scrollLeft += e.deltaX;
     }
   }, {passive:false});
 })();
