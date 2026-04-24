@@ -937,10 +937,16 @@ function showMapPopup(ids, idx){
     const p = ALL_PROPERTIES.find(x=>x.id===id);
     return p ? cardHTML(p) : '';
   }).join('');
-  const vp = document.getElementById('mpViewport');
-  if(vp) vp.scrollLeft = 0;
-  updateNavState();
+  // Show overlay first so layout is computed
   document.getElementById('mapOverlay').classList.add('visible');
+  // Reset scroll after two animation frames so slots have their real offsets
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      const vp = document.getElementById('mpViewport');
+      if(vp) vp.scrollLeft = 0;
+      updateNavState();
+    });
+  });
 }
 
 function hideMapPopup(){
