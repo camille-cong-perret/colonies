@@ -956,14 +956,58 @@ function handleOverlayClick(e){
   hideMapPopup();
 }
 
+/* Scroll viewport to center a specific card index */
+function scrollToCard(idx, behavior='smooth'){
+  const vp = document.getElementById('mpViewport');
+  if(!vp) return;
+  const slots = vp.querySelectorAll('.mp-card-slot');
+  const slot = slots[idx];
+  if(!slot) return;
+  const vpW = vp.offsetWidth;
+  const slotW = slot.offsetWidth;
+  vp.scrollTo({ left: slot.offsetLeft - (vpW - slotW)/2, behavior });
+}
+
+/* Find which card is most centered in viewport */
+function getCenteredIdx(){
+  const vp = document.getElementById('mpViewport');
+  if(!vp) return 0;
+  const slots = vp.querySelectorAll('.mp-card-slot');
+  const center = vp.scrollLeft + vp.offsetWidth / 2;
+  let best = 0, bestDist = Infinity;
+  slots.forEach((s, i) => {
+    const slotCenter = s.offsetLeft + s.offsetWidth / 2;
+    const dist = Math.abs(slotCenter - center);
+    if(dist < bestDist){ bestDist = dist; best = i; }
+  });
+  return best;
+}
+
+/* Arrow click: snap nearest card to center, then go one more in dir */
 function mpNavigate(dir){
-  const newIdx = mpIdx + dir;
-  if(newIdx < 0 || newIdx >= mpIds.length) return;
-  mpIdx = newIdx;
-  const track = document.getElementById('mpTrack');
-  track.style.transform = `translateX(-${mpIdx * 100}%)`;
+  const centered = getCenteredIdx();
+  const target = Math.max(0, Math.min(mpIds.length - 1, centered + dir));
+  mpIdx = target;
+  scrollToCard(target);
   updateNavState();
 }
+
+/* Listen to scroll to update counter in real time */
+(function setupScrollCounter(){
+  const vp = document.getElementById('mpViewport');
+  if(!vp) return;
+  let ticking = false;
+  vp.addEventListener('scroll', ()=>{
+    if(!ticking){
+      requestAnimationFrame(()=>{
+        mpIdx = getCenteredIdx();
+        updateNavState();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+})();
 
 function updateNavState(){
   const nav = document.getElementById('mpNav');
