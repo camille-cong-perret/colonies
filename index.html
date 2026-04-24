@@ -166,8 +166,8 @@
     /* MAP */
     .map-panel{position:sticky;top:130px;height:calc(100vh - 130px);overflow:hidden}
     #map{width:100%;height:100%}
-    .leaflet-control-zoom{border-radius:8px!important;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.15)!important}
-    .leaflet-control-zoom a{width:30px!important;height:30px!important;line-height:30px!important;font-size:16px!important}
+    .leaflet-control-zoom{border-radius:8px!important;overflow:hidden;box-shadow:none!important;border:none!important}
+    .leaflet-control-zoom a{width:30px!important;height:30px!important;line-height:30px!important;font-size:16px!important;border:none!important;box-shadow:none!important}
 
     /* MARKERS */
     .marker-wrap{position:relative;display:flex;align-items:center;justify-content:center;overflow:visible}
@@ -202,16 +202,16 @@
     #search-here-btn svg{width:14px;height:14px;flex-shrink:0}
 
     /* FILTER BADGE — rectangle br:4 */
-    #map-filter-badge{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-      z-index:1000;background:var(--teal);color:white;border-radius:4px;
+    #map-filter-badge{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+      z-index:1000;background:white;color:#111;border-radius:4px;border:1.5px solid #111;
       padding:7px 14px;font-size:12px;font-weight:600;
       display:flex;align-items:center;gap:7px;
       box-shadow:0 2px 10px rgba(0,0,0,.22);
       opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap}
     #map-filter-badge.visible{opacity:1;pointer-events:auto}
-    #map-filter-badge button{background:rgba(255,255,255,.22);border:none;border-radius:3px;
+    #map-filter-badge button{background:#111;border:none;border-radius:3px;
       color:white;font-size:11px;padding:2px 9px;cursor:pointer;font-family:inherit;font-weight:600}
-    #map-filter-badge button:hover{background:#111;color:white}
+    #map-filter-badge button:hover{background:#333;color:white}
     /* MAP OVERLAY + CAROUSEL */
     .map-overlay{
       position:absolute;inset:0;
@@ -241,7 +241,7 @@
     /* Track: natural flex row, no transform needed */
     .mp-carousel-track{
       display:flex;
-      gap:12px;          /* gap between cards */
+      gap:45px;          /* gap between cards */
       padding:0 40px;    /* side padding so first/last card can center */
     }
     /* Each card slot: narrower than 100% so neighbors peek */
