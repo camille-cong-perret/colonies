@@ -827,6 +827,30 @@ function initMap(){
   map.on('moveend zoomend',()=>{clearTimeout(moveTimeout);moveTimeout=setTimeout(showSearchHere,350);});
 }
 
+/* ── Swipe support on carousel ── */
+(function(){
+  const vp = document.getElementById('mpViewport');
+  if(!vp) return;
+  let startX=0, startY=0, dragging=false;
+  const THRESHOLD = 40;
+
+  vp.addEventListener('pointerdown', e=>{
+    startX=e.clientX; startY=e.clientY; dragging=true;
+    vp.setPointerCapture(e.pointerId);
+  });
+  vp.addEventListener('pointerup', e=>{
+    if(!dragging) return;
+    dragging=false;
+    const dx=e.clientX-startX;
+    const dy=e.clientY-startY;
+    if(Math.abs(dx)>Math.abs(dy) && Math.abs(dx)>THRESHOLD){
+      if(dx<0) mpNavigate(1);   // swipe left → next
+      else     mpNavigate(-1);  // swipe right → prev
+    }
+  });
+  vp.addEventListener('pointercancel',()=>{ dragging=false; });
+})();
+
 /* ═══════════════════════════════════════════════════════
    HOVER → SHOW TRANSPORT LINES
 ═══════════════════════════════════════════════════════ */
@@ -861,9 +885,11 @@ function searchHere(){
   currentBounds=map.getBounds();
   mapFilterActive=true;
   filteredIds=ALL_PROPERTIES.filter(p=>currentBounds.contains(L.latLng(p.lat,p.lng))).map(p=>p.id);
+  currentPage=1;
   renderCards();
   updateMarkerVisibility(filteredIds);
   document.getElementById('map-filter-badge').classList.add('visible');
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function clearMapFilter(){
