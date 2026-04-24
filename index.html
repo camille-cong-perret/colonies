@@ -232,8 +232,10 @@
       overflow-y:visible;
       position:relative;
       padding:4px 0;
-      scroll-behavior:smooth;
-      -webkit-overflow-scrolling:touch;
+      -webkit-overflow-scrolling:touch;   /* iOS momentum */
+      overscroll-behavior-x:contain;      /* prevent page scroll bleed */
+      touch-action:pan-x;                 /* hint to Chrome: horizontal only */
+      will-change:scroll-position;        /* GPU layer for smooth compositing */
       /* hide scrollbar */
       scrollbar-width:none;
     }
@@ -827,18 +829,7 @@ function initMap(){
   map.on('moveend zoomend',()=>{clearTimeout(moveTimeout);moveTimeout=setTimeout(showSearchHere,350);});
 }
 
-/* ── Trackpad: natural horizontal scroll on carousel ── */
-(function(){
-  const vp = document.getElementById('mpViewport');
-  if(!vp) return;
-  // Let horizontal trackpad scroll flow naturally into the scrollable viewport
-  vp.addEventListener('wheel', e=>{
-    if(Math.abs(e.deltaX) >= Math.abs(e.deltaY)){
-      e.preventDefault();
-      vp.scrollLeft += e.deltaX;
-    }
-  }, {passive:false});
-})();
+/* Native horizontal scroll — no custom wheel handler needed */
 
 /* ═══════════════════════════════════════════════════════
    HOVER → SHOW TRANSPORT LINES
