@@ -931,18 +931,14 @@ function cardHTML(p){
 }
 
 function showMapPopup(ids, idx){
-  mpIds=ids; mpIdx=idx;
-  // Build all cards in the track
+  mpIds=ids; mpIdx=0; // always reset to first card
   const track = document.getElementById('mpTrack');
   track.innerHTML = ids.map(id => {
     const p = ALL_PROPERTIES.find(x=>x.id===id);
     return p ? cardHTML(p) : '';
   }).join('');
-  // Snap to starting card instantly (no transition)
-  track.style.transition = 'none';
-  track.style.transform = `translateX(-${mpIdx * 100}%)`;
-  // Re-enable transition after paint
-  requestAnimationFrame(()=>{ track.style.transition = ''; });
+  const vp = document.getElementById('mpViewport');
+  if(vp) vp.scrollLeft = 0;
   updateNavState();
   document.getElementById('mapOverlay').classList.add('visible');
 }
