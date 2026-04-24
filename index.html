@@ -355,7 +355,7 @@
   <div class="list-panel" id="listPanel">
     <div class="list-header">
       <h1>Housing in <strong>Paris</strong></h1>
-      <span id="resultCount">23 results</span>
+      <span id="resultCount">22 results</span>
     </div>
     <div class="badges" id="badgesRow">
       <span class="feat-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Fully furnished accommodation</span>
@@ -471,10 +471,6 @@ const ALL_PROPERTIES = [
     meta:"Shared home | 15 units | 359 m²",  perks:[],
     price:"from €1,380", priceShort:"€1,380", oldPrice:null, discount:null, opening:null,
     img:"bovary-house.jpeg",     lat:48.856, lng:2.360, lines:["J","L","M13"] },
-  { id:9,  page:1, name:"Jumo Home 5.01",    city:"Paris", type:"Coliving",    xxl:true,  avail:"2 UNITS AVAILABLE",
-    meta:"Shared home | 12 units | 410 m²",  perks:[],
-    price:"from €1,138", priceShort:"€1,138", oldPrice:null, discount:null, opening:null,
-    img:"jumo-home-5.01.png",    lat:48.849, lng:2.298, lines:["M12","T3b"] },
   { id:10, page:1, name:"Garnier",           city:"Paris", type:"Coliving",    xxl:false, avail:"3 UNITS AVAILABLE",
     meta:"Shared home | 10 units | 200 m²",  perks:["Living room","Balcony"],
     price:"from €1,383", priceShort:"€1,383", oldPrice:null, discount:null, opening:null,
@@ -691,7 +687,7 @@ function renderCards(){
     pagination.style.display='none';
   } else {
     list=ALL_PROPERTIES.filter(p=>p.page===currentPage);
-    document.getElementById('resultCount').textContent='23 results';
+    document.getElementById('resultCount').textContent='22 results';
     badgesRow.style.display=currentPage===1?'flex':'none';
     renderPagination();
     pagination.style.display='flex';
