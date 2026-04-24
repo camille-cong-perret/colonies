@@ -242,7 +242,7 @@
     .mp-carousel-track{
       display:flex;
       gap:45px;          /* gap between cards */
-      padding:0 40px;    /* side padding so first/last card can center */
+      padding:0;    /* set dynamically via JS */
     }
     /* Each card slot: narrower than 100% so neighbors peek */
     .mp-card-slot{
@@ -939,11 +939,18 @@ function showMapPopup(ids, idx){
   }).join('');
   // Show overlay first so layout is computed
   document.getElementById('mapOverlay').classList.add('visible');
-  // Reset scroll after two animation frames so slots have their real offsets
   requestAnimationFrame(()=>{
     requestAnimationFrame(()=>{
       const vp = document.getElementById('mpViewport');
-      if(vp) vp.scrollLeft = 0;
+      if(!vp) return;
+      // Compute padding so first/last card can be perfectly centred
+      const slot = vp.querySelector('.mp-card-slot');
+      if(slot){
+        const sidePad = Math.max(0, (vp.offsetWidth - slot.offsetWidth) / 2);
+        track.style.paddingLeft  = sidePad + 'px';
+        track.style.paddingRight = sidePad + 'px';
+      }
+      vp.scrollLeft = 0;
       updateNavState();
     });
   });
