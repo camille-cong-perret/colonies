@@ -823,64 +823,28 @@ function initMap(){
   map.on('moveend zoomend',()=>{clearTimeout(moveTimeout);moveTimeout=setTimeout(showSearchHere,350);});
 }
 
-/* ── Swipe / drag support on carousel ── */
+/* ── Trackpad horizontal scroll on carousel ── */
 (function(){
   const vp = document.getElementById('mpViewport');
   if(!vp) return;
-  const THRESHOLD = 50;
-  let startX=0, dragging=false, currentDx=0;
+  let accumulated = 0;
+  const THRESHOLD = 60;
+  let locked = false;
 
-  function getTrack(){ return document.getElementById('mpTrack'); }
-  function getBaseOffset(){ return -(mpIdx * 100); } // percent
-
-  function applyDrag(dx){
-    const track = getTrack();
-    if(!track) return;
-    // Temporarily offset track while dragging
-    const pct = getBaseOffset();
-    const vpW = vp.offsetWidth || 500;
-    const extra = (dx / vpW) * 100;
-    track.style.transition = 'none';
-    track.style.transform = `translateX(${pct + extra}%)`;
-  }
-
-  function releaseDrag(dx){
-    const track = getTrack();
-    if(!track) return;
-    track.style.transition = '';
-    if(Math.abs(dx) > THRESHOLD){
-      if(dx < 0) mpNavigate(1);
-      else       mpNavigate(-1);
-    } else {
-      // Snap back
-      track.style.transform = `translateX(${getBaseOffset()}%)`;
+  vp.addEventListener('wheel', e=>{
+    // Only act on horizontal scroll (trackpad two-finger swipe)
+    if(Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    if(locked) return;
+    accumulated += e.deltaX;
+    if(Math.abs(accumulated) > THRESHOLD){
+      locked = true;
+      if(accumulated > 0) mpNavigate(1);   // swipe left → next
+      else                mpNavigate(-1);  // swipe right → prev
+      accumulated = 0;
+      setTimeout(()=>{ locked=false; }, 500); // cooldown between flips
     }
-  }
-
-  // Pointer events (mouse + touch via pointer)
-  vp.addEventListener('pointerdown', e=>{
-    startX = e.clientX; dragging = true; currentDx = 0;
-    vp.setPointerCapture(e.pointerId);
-    vp.style.cursor = 'grabbing';
-  });
-  vp.addEventListener('pointermove', e=>{
-    if(!dragging) return;
-    currentDx = e.clientX - startX;
-    applyDrag(currentDx);
-  });
-  vp.addEventListener('pointerup', e=>{
-    if(!dragging) return;
-    dragging = false;
-    vp.style.cursor = '';
-    releaseDrag(currentDx);
-  });
-  vp.addEventListener('pointercancel', ()=>{
-    dragging = false;
-    vp.style.cursor = '';
-    const track = getTrack();
-    if(track){ track.style.transition=''; track.style.transform=`translateX(${getBaseOffset()}%)`; }
-  });
-  vp.style.cursor = 'grab';
+  }, {passive:false});
 })();
 
 /* ═══════════════════════════════════════════════════════
