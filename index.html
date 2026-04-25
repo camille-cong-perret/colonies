@@ -199,17 +199,18 @@
       box-shadow:0 3px 14px rgba(0,0,0,.18);
       opacity:0;pointer-events:none;transition:opacity .2s;white-space:nowrap}
     #search-here-btn.visible{opacity:1;pointer-events:auto}
-    #search-here-btn:hover{background:var(--teal);color:white;border-color:var(--teal)}
+    #search-here-btn:hover{background:#111;color:white;border-color:#111}
     #search-here-btn svg{width:14px;height:14px;flex-shrink:0}
 
     /* FILTER BADGE — rectangle br:4 */
     #map-filter-badge{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
-      z-index:1000;background:white;color:#111;border-radius:4px;
+      z-index:1000;background:white;color:#111;border-radius:4px;transition:background .15s,color .15s;
       padding:7px 14px;font-size:12px;font-weight:600;
       display:flex;align-items:center;gap:7px;
       box-shadow:0 2px 10px rgba(0,0,0,.22);
       opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap}
     #map-filter-badge.visible{opacity:1;pointer-events:auto}
+    #map-filter-badge:hover{background:#111;color:white}
     #map-filter-badge button{background:#111;border:none;border-radius:3px;
       color:white;font-size:11px;padding:2px 9px;cursor:pointer;font-family:inherit;font-weight:600}
     #map-filter-badge button:hover{background:#333;color:white}
@@ -454,15 +455,15 @@ const ALL_PROPERTIES = [
   { id:3,  page:1, name:"Paris Ivry",        city:"Paris", type:"Flatshare",   xxl:false, avail:"3 UNITS AVAILABLE",
     meta:"Shared home | 7 units | 144 m²",   perks:[],
     price:"from €1,058", priceShort:"€1,058", oldPrice:null, discount:null, opening:null,
-    img:"paris-ivry.jpeg",       lat:48.823, lng:2.366, lines:["M7"] },
+    img:"paris-ivry.jpeg",       lat:48.823, lng:2.366, lines:["M7","M14"] },
   { id:4,  page:1, name:"Liège",             city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 10 units | 240 m²",  perks:[],
     price:"from €1,350", priceShort:"€1,350", oldPrice:null, discount:null, opening:null,
-    img:"liege.jpeg",            lat:48.878, lng:2.332, lines:["J","L","M13"] },
+    img:"liege.jpeg",            lat:48.878, lng:2.332, lines:["J","L","M13","M2"] },
   { id:5,  page:1, name:"Paris Garibaldi",   city:"Paris", type:"Flatshare",   xxl:false, avail:"1 UNIT AVAILABLE",
     meta:"Shared home | 5 units | 105 m²",   perks:[],
     price:"from €1,047", priceShort:"€1,047", oldPrice:"€1,237", discount:"Discount on the first 3 rents", opening:null,
-    img:"paris-garibaldi.jpeg",  lat:48.833, lng:2.309, lines:["M12"] },
+    img:"paris-garibaldi.jpeg",  lat:48.833, lng:2.309, lines:["M10","M6"] },
   // PROMO after id:5
   { id:6,  page:1, name:"Paris Borrégo",     city:"Paris", type:"Flatshare",   xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 5 units | 92 m²",    perks:["Balcony"],
@@ -475,11 +476,11 @@ const ALL_PROPERTIES = [
   { id:8,  page:1, name:"Bovary House",      city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 15 units | 359 m²",  perks:[],
     price:"from €1,380", priceShort:"€1,380", oldPrice:null, discount:null, opening:null,
-    img:"bovary-house.jpeg",     lat:48.856, lng:2.360, lines:["J","L","M13"] },
+    img:"bovary-house.jpeg",     lat:48.856, lng:2.360, lines:["J","L","M13","M2"] },
   { id:10, page:1, name:"Garnier",           city:"Paris", type:"Coliving",    xxl:false, avail:"3 UNITS AVAILABLE",
     meta:"Shared home | 10 units | 200 m²",  perks:["Living room","Balcony"],
     price:"from €1,383", priceShort:"€1,383", oldPrice:null, discount:null, opening:null,
-    img:"garnier.jpeg",          lat:48.867, lng:2.341, lines:["RER_A","J"] },
+    img:"garnier.jpeg",          lat:48.867, lng:2.341, lines:["RER_A","J","L"] },
   // PAGE 2
   { id:11, page:2, name:"Helios 505",        city:"Paris", type:"Private Flat", xxl:true,  avail:"AVAILABLE ON 24 APRIL 2026",
     meta:"Private flat | Studio | 15 m²",    perks:[],
@@ -513,7 +514,7 @@ const ALL_PROPERTIES = [
   { id:18, page:2, name:"Paris Oradour",     city:"Paris", type:"Flatshare",   xxl:false, avail:"3 UNITS AVAILABLE",
     meta:"Shared home | 6 units | 129 m²",   perks:[],
     price:"from €1,030", priceShort:"€1,030", oldPrice:null, discount:null, opening:null,
-    img:"paris-oradour.jpeg",    lat:48.846, lng:2.273, lines:["M4","T3b"] },
+    img:"paris-oradour.jpeg",    lat:48.846, lng:2.273, lines:["M4"] },
   { id:19, page:2, name:"Brabo",             city:"Paris", type:"Coliving",    xxl:false, avail:"1 UNIT AVAILABLE",
     meta:"Shared home | 7 units | 185 m²",   perks:["Terrace","Projection room","Veranda"],
     price:"from €1,133", priceShort:"€1,133", oldPrice:null, discount:null, opening:null,
@@ -641,6 +642,21 @@ const LINE_DEFS = {
   M13:{label:'13',bg:'#4EB6AE',fg:'#fff',shape:'circle',sz:15,color:'#4EB6AE',
     route:[[48.820,2.294],[48.831,2.294],[48.843,2.296],[48.851,2.308],[48.861,2.311],[48.869,2.317],[48.876,2.335],[48.879,2.336],[48.883,2.333],[48.887,2.327],[48.898,2.333],[48.906,2.329],[48.920,2.323],[48.940,2.323]],
     stations:[[48.820,2.294],[48.843,2.296],[48.869,2.317],[48.876,2.335],[48.879,2.336],[48.898,2.333],[48.940,2.323]]},
+
+  // ── M2  dark blue – east-west northern Paris (Porte Dauphine → Porte de Bagnolet)
+  M2:{label:'2',bg:'#003FA9',fg:'#fff',shape:'circle',sz:15,color:'#003FA9',
+    route:[[48.870,2.260],[48.875,2.279],[48.879,2.293],[48.882,2.307],[48.884,2.321],[48.881,2.336],[48.880,2.349],[48.879,2.364],[48.875,2.381],[48.868,2.394]],
+    stations:[[48.870,2.260],[48.879,2.293],[48.882,2.307],[48.881,2.336],[48.880,2.349],[48.879,2.364],[48.868,2.394]]},
+
+  // ── M10 yellow-gold – Boulogne → Gare d'Austerlitz via 15th/6th
+  M10:{label:'10',bg:'#E3B32A',fg:'#fff',shape:'circle',sz:15,color:'#E3B32A',
+    route:[[48.834,2.228],[48.838,2.248],[48.842,2.264],[48.845,2.278],[48.847,2.291],[48.850,2.307],[48.852,2.323],[48.848,2.338],[48.843,2.350],[48.837,2.360],[48.829,2.369]],
+    stations:[[48.834,2.228],[48.842,2.264],[48.847,2.291],[48.850,2.307],[48.852,2.323],[48.843,2.350],[48.829,2.369]]},
+
+  // ── M14 dark violet – Saint-Lazare → Olympiades (roughly north-south)
+  M14:{label:'14',bg:'#6E2D88',fg:'#fff',shape:'circle',sz:15,color:'#6E2D88',
+    route:[[48.876,2.324],[48.870,2.326],[48.865,2.333],[48.859,2.347],[48.852,2.362],[48.845,2.372],[48.840,2.380],[48.832,2.378],[48.825,2.374]],
+    stations:[[48.876,2.324],[48.865,2.333],[48.859,2.347],[48.845,2.372],[48.832,2.378]]},
 
   // ── T3b  dark teal – outer ring east side (Vincennes→Pont du Garigliano)
   T3b:{label:'3b',bg:'#73c2a0',fg:'#fff',shape:'round',sz:15,color:'#73c2a0',
