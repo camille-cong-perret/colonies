@@ -854,11 +854,11 @@ function onCardHover(propId,on,updateMarker=true){
   const prop=ALL_PROPERTIES.find(p=>p.id===propId);
   if(!prop)return;
   if(on){
-    activeLines.forEach(id=>map.removeLayer(lineGroups[id]));
+    activeLines.forEach(id=>lineGroups[id]&&map.removeLayer(lineGroups[id]));
     activeLines=prop.lines||[];
     activeLines.forEach(id=>lineGroups[id]&&lineGroups[id].addTo(map));
   } else {
-    activeLines.forEach(id=>map.removeLayer(lineGroups[id]));
+    activeLines.forEach(id=>lineGroups[id]&&map.removeLayer(lineGroups[id]));
     activeLines=[];
   }
   const card=document.querySelector(`.card[data-id="${propId}"]`);
