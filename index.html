@@ -204,13 +204,14 @@
 
     /* FILTER BADGE — rectangle br:4 */
     #map-filter-badge{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
-      z-index:1000;background:white;color:#111;border-radius:4px;transition:background .15s,color .15s;
+      z-index:1000;background:white;color:#111;border-radius:4px;transition:background .15s,color .15s;transition:background .15s,color .15s;
       padding:7px 14px;font-size:12px;font-weight:600;
       display:flex;align-items:center;gap:7px;
       box-shadow:0 2px 10px rgba(0,0,0,.22);
       opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap}
     #map-filter-badge.visible{opacity:1;pointer-events:auto}
     #map-filter-badge:hover{background:#111;color:white}
+    #map-filter-badge:hover{background:#111!important;color:white!important}
     #map-filter-badge button{background:#111;border:none;border-radius:3px;
       color:white;font-size:11px;padding:2px 9px;cursor:pointer;font-family:inherit;font-weight:600}
     #map-filter-badge button:hover{background:#333;color:white}
@@ -522,7 +523,7 @@ const ALL_PROPERTIES = [
   { id:20, page:2, name:"Amélie",            city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 14 units | 350 m²",  perks:["Terrace"],
     price:"from €1,345", priceShort:"€1,345", oldPrice:null, discount:null, opening:null,
-    img:"amelie.jpeg",           lat:48.836, lng:2.281, lines:["M4"] },
+    img:"amelie.jpeg",           lat:48.882, lng:2.344, lines:["M4","M12"] },
   // PAGE 3
   { id:21, page:3, name:"Helios 504",        city:"Paris", type:"Private Flat", xxl:true,  avail:"ENTIRE FLAT AVAILABLE",
     meta:"Private flat | Studio | 13 m²",    perks:[],
