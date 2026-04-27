@@ -629,7 +629,7 @@ function renderCards(){
     // Map filter: show all matched across all pages, no pagination
     list=ALL_PROPERTIES.filter(p=>filteredIds.includes(p.id));
     document.getElementById('resultCount').textContent=`${list.length} results`;
-    badgesRow.style.display='none';
+    badgesRow.style.display='flex';
     pagination.style.display='none';
   } else {
     list=ALL_PROPERTIES.filter(p=>p.page===currentPage);
@@ -695,6 +695,7 @@ function goToPage(n){
   if(n<1||n>3)return;
   currentPage=n;
   document.getElementById('listPanel').scrollTop=0;
+  window.scrollTo({top:0, behavior:'smooth'});
   renderCards();
 }
 
