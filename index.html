@@ -96,12 +96,12 @@
       border-radius:5px;text-transform:uppercase}
     .card-body{padding:18px 22px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
     .card-tags{display:flex;gap:6px;margin-bottom:9px;flex-wrap:wrap;align-items:center}
-    .tag{font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:4px;
+    .tag{font-size:13px;font-weight:600;padding:5px 13px;border-radius:4px;
       display:inline-flex;align-items:center;gap:4px;line-height:1}
     .tag.co  {background:var(--co-bg);  color:var(--co-fg)}
     .tag.flat{background:var(--flat-bg);color:var(--flat-fg)}
     .tag.priv{background:var(--priv-bg);color:var(--priv-fg)}
-    .tag.xxl {background:var(--xxl-bg); color:var(--xxl-fg);font-size:11px}
+    .tag.xxl {background:var(--xxl-bg); color:var(--xxl-fg);font-size:12px}
     .tag-help{width:18px;height:18px;border:1.5px solid #111;border-radius:50%;
       display:inline-flex;align-items:center;justify-content:center;
       font-size:11px;font-weight:700;color:#111;cursor:pointer;
@@ -122,13 +122,13 @@
       font-size:22px;line-height:1;color:#111;font-weight:300;z-index:10;padding:4px 8px;border-radius:50%}
     .modal-box img{width:100%;height:100%;object-fit:contain;display:block;border-radius:14px}
 
-    .card-title{font-size:18px;font-weight:700;margin-bottom:5px;line-height:1.2}
+    .card-title{font-size:21px;font-weight:700;margin-bottom:5px;line-height:1.2}
     .card-title span{font-weight:400}
-    .card-meta{font-size:12.5px;color:var(--text);line-height:1.55}
-    .card-price{font-size:15.5px;font-weight:700;text-align:right}
+    .card-meta{font-size:14px;color:var(--text);line-height:1.55}
+    .card-price{font-size:17px;font-weight:700;text-align:right}
     .card-price .from{font-weight:400}
     .card-price .old{text-decoration:line-through;color:var(--muted);font-weight:400;margin-right:3px}
-    .card-price .disc{display:block;font-size:11px;font-weight:400;color:var(--muted);margin-top:2px}
+    .card-price .disc{display:block;font-size:12px;font-weight:400;color:var(--muted);margin-top:2px}
 
     /* PROMO BLOCKS */
     .promo-block{background:#f2e8d6;border-radius:var(--radius);padding:22px 24px;margin-bottom:16px;flex-shrink:0}
@@ -464,7 +464,7 @@ const ALL_PROPERTIES = [
   { id:5,  page:1, name:"Paris Garibaldi",   city:"Paris", type:"Flatshare",   xxl:false, avail:"1 UNIT AVAILABLE",
     meta:"Shared home | 5 units | 105 m²",   perks:[],
     price:"from €1,047", priceShort:"€1,047", oldPrice:"€1,237", discount:"Discount on the first 3 rents", opening:null,
-    img:"paris-garibaldi.jpeg",  lat:48.848, lng:2.304, lines:["M6","M10"] },
+    img:"paris-garibaldi.jpeg",  lat:48.848, lng:2.312, lines:["M6","M10"] },
   // PROMO after id:5
   { id:6,  page:1, name:"Paris Borrégo",     city:"Paris", type:"Flatshare",   xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 5 units | 92 m²",    perks:["Balcony"],
@@ -478,27 +478,28 @@ const ALL_PROPERTIES = [
     meta:"Shared home | 15 units | 359 m²",  perks:[],
     price:"from €1,380", priceShort:"€1,380", oldPrice:null, discount:null, opening:null,
     img:"bovary-house.jpeg",     lat:48.881, lng:2.320, lines:["M2","M3","M13","M14","L"] },
+  { id:12, page:1, name:"Helios 4",          city:"Paris", type:"Coliving",    xxl:true,  avail:"4 UNITS AVAILABLE",
+    meta:"Shared home | 5 units | 108 m²",   perks:[],
+    price:"from €1,550", priceShort:"€1,550", oldPrice:null, discount:null, opening:null,
+    img:"helios-4.png",          lat:48.879, lng:2.290, lines:["RER_C","M3","T3b"] },
   { id:10, page:1, name:"Garnier",           city:"Paris", type:"Coliving",    xxl:false, avail:"3 UNITS AVAILABLE",
     meta:"Shared home | 10 units | 200 m²",  perks:["Living room","Balcony"],
     price:"from €1,383", priceShort:"€1,383", oldPrice:null, discount:null, opening:null,
     img:"garnier.jpeg",          lat:48.871, lng:2.335, lines:["RER_A","M3","M7","M8","M9","M14"] },
   // PAGE 2
-  { id:11, page:2, name:"Helios 505",        city:"Paris", type:"Private Flat", xxl:true,  avail:"AVAILABLE ON 24 APRIL 2026",
-    meta:"Private flat | Studio | 15 m²",    perks:[],
-    price:"€1,690",      priceShort:"€1,690", oldPrice:null, discount:null, opening:null,
-    img:"helios-505.jpeg",       lat:48.880, lng:2.286, lines:["RER_C","M3","T3b"] },
-  { id:12, page:2, name:"Helios 4",          city:"Paris", type:"Coliving",    xxl:true,  avail:"4 UNITS AVAILABLE",
-    meta:"Shared home | 5 units | 108 m²",   perks:[],
-    price:"from €1,550", priceShort:"€1,550", oldPrice:null, discount:null, opening:null,
-    img:"helios-4.png",          lat:48.879, lng:2.290, lines:["RER_C","M3","T3b"] },
-  { id:13, page:2, name:"Jumo Home 7.02",    city:"Paris", type:"Coliving",    xxl:true,  avail:"6 UNITS AVAILABLE",
-    meta:"Shared home | 12 units | 380 m²",  perks:[],
-    price:"from €1,490", priceShort:"€1,490", oldPrice:null, discount:null, opening:null,
-    img:"jumo-home-7.02.png",    lat:48.850, lng:2.300, lines:["M6","M12"] },
+  // PAGE 2
   { id:14, page:2, name:"Helios 310",        city:"Paris", type:"Private Flat", xxl:true,  avail:"AVAILABLE ON 02 JUNE 2026",
     meta:"Private flat | Studio | 12 m²",    perks:[],
     price:"€1,550",      priceShort:"€1,550", oldPrice:null, discount:null, opening:null,
     img:"helios-310.jpeg",       lat:48.881, lng:2.291, lines:["RER_C","M3","T3b"] },
+  { id:11, page:2, name:"Helios 505",        city:"Paris", type:"Private Flat", xxl:true,  avail:"AVAILABLE ON 24 APRIL 2026",
+    meta:"Private flat | Studio | 15 m²",    perks:[],
+    price:"€1,690",      priceShort:"€1,690", oldPrice:null, discount:null, opening:null,
+    img:"helios-505.jpeg",       lat:48.880, lng:2.286, lines:["RER_C","M3","T3b"] },
+  { id:13, page:2, name:"Jumo Home 7.02",    city:"Paris", type:"Coliving",    xxl:true,  avail:"6 UNITS AVAILABLE",
+    meta:"Shared home | 12 units | 380 m²",  perks:[],
+    price:"from €1,490", priceShort:"€1,490", oldPrice:null, discount:null, opening:null,
+    img:"jumo-home-7.02.png",    lat:48.850, lng:2.300, lines:["M6","M12"] },
   { id:15, page:2, name:"Paris Jean Jaurès", city:"Paris", type:"Flatshare",   xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 6 units | 125 m²",   perks:[],
     price:"from €1,092", priceShort:"€1,092", oldPrice:null, discount:null, opening:null,
@@ -523,12 +524,13 @@ const ALL_PROPERTIES = [
   { id:20, page:2, name:"Amélie",            city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 14 units | 350 m²",  perks:["Terrace"],
     price:"from €1,345", priceShort:"€1,345", oldPrice:null, discount:null, opening:null,
-    img:"amelie.jpeg",           lat:48.882, lng:2.344, lines:["M4","M12"] },
+    img:"amelie.jpeg",           lat:48.893, lng:2.344, lines:["M4","M12"] },
   // PAGE 3
-  { id:21, page:3, name:"Helios 504",        city:"Paris", type:"Private Flat", xxl:true,  avail:"ENTIRE FLAT AVAILABLE",
+  { id:21, page:2, name:"Helios 504",        city:"Paris", type:"Private Flat", xxl:true,  avail:"ENTIRE FLAT AVAILABLE",
     meta:"Private flat | Studio | 13 m²",    perks:[],
     price:"€1,550",      priceShort:"€1,550", oldPrice:null, discount:null, opening:null,
     img:"helios-504.jpeg",       lat:48.881, lng:2.289, lines:["RER_C","M3","T3b"] },
+  // PAGE 3
   { id:22, page:3, name:"Helios 307",        city:"Paris", type:"Private Flat", xxl:true,  avail:"AVAILABLE ON 08 JUNE 2026",
     meta:"Private flat | Studio | 15 m²",    perks:[],
     price:"€1,550",      priceShort:"€1,550", oldPrice:null, discount:null, opening:null,
@@ -551,35 +553,9 @@ function promoFeaturesHTML() {
 }
 
 function promoHowItWorksHTML() {
-  return `<div class="promo-block"><div class="promo-steps">
-    <div class="promo-step">
-      <div class="step-icon-wrap">
-        <div style="width:64px;height:64px;background:#fce7f3;border-radius:50%;display:flex;align-items:center;justify-content:center">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="18" height="18" rx="2" stroke="#be185d" stroke-width="2"/><circle cx="24" cy="24" r="5" fill="#fce7f3" stroke="#be185d" stroke-width="2"/><line x1="22" y1="24" x2="26" y2="24" stroke="#be185d" stroke-width="2" stroke-linecap="round"/><line x1="24" y1="22" x2="24" y2="26" stroke="#be185d" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <span class="step-num">1</span>
-      </div>
-      <p>Discover our homes with our <span class="hl-pink">virtual tours</span> & apply online</p>
-    </div>
-    <div class="promo-step">
-      <div class="step-icon-wrap">
-        <div style="width:64px;height:64px;background:#ccf0eb;border-radius:50%;display:flex;align-items:center;justify-content:center">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 6C10.5 6 6 10.5 6 16s4.5 10 10 10 10-4.5 10-10S21.5 6 16 6z" stroke="#0f7a6e" stroke-width="2"/><path d="M12 14a4 4 0 1 0 8 0 4 4 0 0 0-8 0z" fill="#ccf0eb" stroke="#0f7a6e" stroke-width="1.5"/><path d="M9 22c1-2 3.5-3.5 7-3.5s6 1.5 7 3.5" stroke="#0f7a6e" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <span class="step-num">2</span>
-      </div>
-      <p><span class="hl-teal">Quick chat</span> with our team to discuss your needs</p>
-    </div>
-    <div class="promo-step">
-      <div class="step-icon-wrap">
-        <div style="width:64px;height:64px;background:#fef3c7;border-radius:50%;display:flex;align-items:center;justify-content:center">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="18" rx="2" stroke="#d97706" stroke-width="2"/><path d="M12 18l3 3 5-5" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8V4M13 4h6" stroke="#d97706" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <span class="step-num">3</span>
-      </div>
-      <p>Upload your documents & sign your contract <span class="hl-amber">online</span></p>
-    </div>
-  </div></div>`;
+  return `<div class="promo-block" style="padding:0;overflow:hidden;background:none;border-radius:var(--radius)">
+    <img src="${GITHUB}page2-section.png" alt="How it works" style="width:100%;display:block;border-radius:var(--radius)"/>
+  </div>`;
 }
 
 /* ═══════════════════════════════════════════════════════
