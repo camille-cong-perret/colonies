@@ -7,6 +7,30 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <style>
+    @font-face {
+      font-family: 'Gellix';
+      src: url('https://raw.githubusercontent.com/camille-cong-perret/colonies/main/Gellix-Regular.woff2') format('woff2'),
+           url('https://raw.githubusercontent.com/camille-cong-perret/colonies/main/Gellix-Regular.woff') format('woff');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Gellix';
+      src: url('https://raw.githubusercontent.com/camille-cong-perret/colonies/main/Gellix-Medium.woff2') format('woff2'),
+           url('https://raw.githubusercontent.com/camille-cong-perret/colonies/main/Gellix-Medium.woff') format('woff');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Gellix';
+      src: url('https://raw.githubusercontent.com/camille-cong-perret/colonies/main/Gellix-SemiBold.woff2') format('woff2'),
+           url('https://raw.githubusercontent.com/camille-cong-perret/colonies/main/Gellix-SemiBold.woff') format('woff');
+      font-weight: 600; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Gellix';
+      src: url('https://raw.githubusercontent.com/camille-cong-perret/colonies/main/Gellix-Bold.woff2') format('woff2'),
+           url('https://raw.githubusercontent.com/camille-cong-perret/colonies/main/Gellix-Bold.woff') format('woff');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --teal:#039191; --teal-dark:#027070;
@@ -20,7 +44,7 @@
       --xxl-bg:#111;--xxl-fg:#fff;
     }
     html{height:100%;overflow-y:scroll}
-    body{font-family:-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif;
+    body{font-family:'Gellix',-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif;
       background:var(--bg);color:var(--text);display:flex;flex-direction:column;min-height:100%;font-size:14px}
 
     /* NAV */
@@ -28,7 +52,7 @@
       display:flex;align-items:center;padding:0 40px;gap:28px;flex-shrink:0;
       position:sticky;top:0;z-index:300}
     .site-logo{height:32px;width:auto;display:block}
-    .nav-links{display:flex;gap:36px;margin-left:8px}
+    .nav-links{display:flex;gap:36px;margin-left:60px}
     .nav-links a{font-size:16.5px;color:var(--text);text-decoration:none;font-weight:450;display:inline-flex;align-items:center;gap:4px}
     .nav-links a:hover{opacity:1}
     .nav-right{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:16.5px;font-weight:450}
@@ -154,7 +178,7 @@
     /* PAGINATION */
     .pagination{display:flex;align-items:center;justify-content:center;gap:10px;padding:28px 0 12px;flex-shrink:0}
     .page-arrow{background:none;border:none;font-size:0;cursor:pointer;color:#111;
-      padding:0 6px;line-height:1;font-family:serif;opacity:1;transition:opacity .15s}
+      padding:0 6px;line-height:1;font-family:'Gellix',serif;opacity:1;transition:opacity .15s}
     .page-arrow:hover{opacity:.6}
     .page-arrow.hidden{visibility:hidden;pointer-events:none}
     .page-num{background:none;border:1.5px solid transparent;border-radius:50%;
@@ -281,7 +305,7 @@
     .mp-nav button{
       background:none;border:none;padding:0;
       font-size:28px;cursor:pointer;
-      color:white;font-family:serif;line-height:1;
+      color:white;font-family:'Gellix',serif;line-height:1;
       transition:color .15s;
     }
     .mp-nav button.mp-disabled{color:rgba(255,255,255,0.35);cursor:default}
@@ -417,7 +441,7 @@
     <div style="position:absolute;bottom:calc(100% + 8px);right:0;
       background:#111;color:white;font-size:12px;font-weight:500;
       padding:6px 10px;border-radius:5px;white-space:nowrap;
-      pointer-events:none;opacity:0;transition:opacity .15s;font-family:-apple-system,'Helvetica Neue',sans-serif;">
+      pointer-events:none;opacity:0;transition:opacity .15s;font-family:'Gellix',-apple-system,'Helvetica Neue',sans-serif;">
       Back to prototype introduction
       <div style="position:absolute;top:100%;right:12px;border:5px solid transparent;border-top-color:#111;"></div>
     </div>
@@ -524,7 +548,7 @@ const ALL_PROPERTIES = [
   { id:20, page:2, name:"Amélie",            city:"Paris", type:"Coliving",    xxl:false, avail:"2 UNITS AVAILABLE",
     meta:"Shared home | 14 units | 350 m²",  perks:["Terrace"],
     price:"from €1,345", priceShort:"€1,345", oldPrice:null, discount:null, opening:null,
-    img:"amelie.jpeg",           lat:48.893, lng:2.344, lines:["M4","M12"] },
+    img:"amelie.jpeg",           lat:48.893, lng:2.356, lines:["M4","M12"] },
   // PAGE 3
   { id:21, page:2, name:"Helios 504",        city:"Paris", type:"Private Flat", xxl:true,  avail:"ENTIRE FLAT AVAILABLE",
     meta:"Private flat | Studio | 13 m²",    perks:[],
