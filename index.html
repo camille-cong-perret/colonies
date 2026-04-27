@@ -694,8 +694,8 @@ function renderPagination(){
 function goToPage(n){
   if(n<1||n>3)return;
   currentPage=n;
+  window.scrollTo({top:0, behavior:'instant'});
   document.getElementById('listPanel').scrollTop=0;
-  window.scrollTo({top:0, behavior:'smooth'});
   renderCards();
 }
 
